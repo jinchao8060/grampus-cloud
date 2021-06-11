@@ -14,6 +14,6 @@
 
 	<modules>
 		<module>grampus-client-auth</module>
-        <module>grampus-client-system</module>
+        <module>grampus-client-admin</module>
     </modules>
 </project>
