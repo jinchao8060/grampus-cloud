@@ -57,8 +57,8 @@ public class RequestBodyDecoderFilter extends AbstractGatewayFilterFactory {
 
     private static AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-//    private static final String PRIVATE_KEY = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKMsBaPWfq8N+T+XE760W/cFUZfimhDUG3Rv+aV+dXa46OvD4gJsB8HeKrO+GJR4ghhMSmOYzwFEBB07Dfa8hv4IhwGf9ROqHJ0MRlaKwY+pnE7QlFTnIYCdxt3Mrhg+fUSFN+ACaJ/2b1LUl2IRgvwSZKilmcPiUmRmq86dvgN7AgMBAAECgYAz2NER9h3a0b3ZDtAfUH/IRdBfSolZv4vZu5q/kycPykF4aI1v55OvbkBzTHvS8VelENiyPOPJqysDfrg5Jj5eByqsfa71Y9L/i7HeSu/bEd9ZVnauwkYMd9KH4+JUhgOL6F/Gmp/37UXz51nAzTIeJI+f3PyXplgObPuD8EfeQQJBAOEPZB94blUqUXKfEKxs2DymXt3XHx5gGOZGZqYo11tuQN+ikYT5HiZEs4Z2o6twPBZz/G3y7U/gQVr1BfNkE7UCQQC5mpUKIbwEGX6oruttczqZxxWLRtVLAe/bUBTrlS5LgOCvX2ynQETF3bMbNmDh9LZ160665D+rhzkctFBWzphvAkEArGbY4M6lXjIDoFU/NYZPgu5DP5bZ7K/agxOs8F3a0tw7b9SduooG0XPRPhDFwb9BGEYTObpcldKI3f9SZqbj/QJAA5xhR+guGzpPv4JfrCpwumsoHSSMo7/u5apiLc8iLm/cby0BFSPn8p2EjYP6UIsNPbANQQ+NuY2Q6+EKKxYr2wJAS8ZAa9lZvLSeaocbazc3ZMB3ZT1nrljewt3b5lC+vx6/J9+X/7vbTWaoXO+OKjAVmpgX8pIiF6YlTwas0jWeWQ==";
-//    private static final String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCjLAWj1n6vDfk/lxO+tFv3BVGX4poQ1Bt0b/mlfnV2uOjrw+ICbAfB3iqzvhiUeIIYTEpjmM8BRAQdOw32vIb+CIcBn/UTqhydDEZWisGPqZxO0JRU5yGAncbdzK4YPn1EhTfgAmif9m9S1JdiEYL8EmSopZnD4lJkZqvOnb4DewIDAQAB";
+//    private static final String PRIVATE_KEY = "";
+//    private static final String PUBLIC_KEY = "";
 //
 //    private static final String REQUEST_HEADER_ENCRYPT_KEY = "Encrypt-Key";
 
