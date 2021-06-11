@@ -19,7 +19,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        group: ${NACOS-CONFIG-GROUP:ZETAR_CLOUD_GROUP}
+        group: ${NACOS-CONFIG-GROUP:GRAMPUS_CLOUD_GROUP}
         shared-configs:
           - data-id: common-config.${spring.cloud.nacos.config.file-extension}
             group: ${spring.cloud.nacos.config.group}
