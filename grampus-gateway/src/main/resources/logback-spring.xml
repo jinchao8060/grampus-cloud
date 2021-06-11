@@ -55,9 +55,6 @@
 	<logger name="de.codecentric.boot" level="OFF">
 		<appender-ref ref="STDOUT"/>
 	</logger>
-	<logger name="com.vdegree.gateway.manager.dao.SysRouteConfDao" level="ERROR">
-		<appender-ref ref="STDOUT"/>
-	</logger>
 	<logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR">
 		<appender-ref ref="STDOUT"/>
 	</logger>
