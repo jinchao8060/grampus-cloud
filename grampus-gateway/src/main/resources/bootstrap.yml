@@ -1,0 +1,29 @@
+server:
+  port: 6190
+
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active: dev
+  codec:
+    max-in-memory-size: 30MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+        metadata:
+          management:
+            context-path: /actuator
+        namespace: ${NACOS-NAMESPACE:}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        group: ${NACOS-CONFIG-GROUP:ZETAR_CLOUD_GROUP}
+        shared-configs:
+          - data-id: common-config.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: gateway-routes.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
