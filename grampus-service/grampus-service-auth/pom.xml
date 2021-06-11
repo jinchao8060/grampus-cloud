@@ -9,10 +9,6 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>grampus-service-client</artifactId>
-	<packaging>pom</packaging>
+	<artifactId>grampus-service-auth</artifactId>
 
-	<modules>
-		<module>grampus-client-auth</module>
-	</modules>
 </project>
