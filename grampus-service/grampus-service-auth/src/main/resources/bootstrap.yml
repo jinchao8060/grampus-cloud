@@ -1,0 +1,46 @@
+server:
+  port: 6120
+
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active: dev
+  codec:
+    max-in-memory-size: 30MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+        metadata:
+          management:
+            context-path: /actuator
+        namespace: ${NACOS-NAMESPACE:}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        group: ${NACOS-CONFIG-GROUP:GRAMPUS_CLOUD_GROUP}
+        shared-configs:
+          - data-id: common-config.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: gateway-routes.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+    sentinel:
+      filter:
+        url-patterns: /**
+      transport:
+        dashboard: ${SENTINEL-HOST:grampus-sentinel}:${SENTINEL-PORT:8826}
+      eager: true
+      log:
+        dir: logs/${spring.application.name}-sentinel-log
+        switch-pid: true
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+            dataId: sentinel-${spring.application.name}
+            groupId: GRAMPUS_SENTINEL_GROUP
+            data-type: json
+            rule-type: flow
