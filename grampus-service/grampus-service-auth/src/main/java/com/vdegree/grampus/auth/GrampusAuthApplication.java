@@ -15,7 +15,6 @@ import java.util.TimeZone;
 public class GrampusAuthApplication {
 
     public static void main(String[] args) {
-        System.setProperty("csp.sentinel.app.type", "1");
         System.setProperty("user.timezone", "UTC");
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         SpringApplication.run(GrampusAuthApplication.class, args);

@@ -17,17 +17,17 @@
 
 	<properties>
 		<grampus.version>1.0.0</grampus.version>
-		<spring-boot.version>2.4.5</spring-boot.version>
-		<spring-cloud.version>2020.0.1</spring-cloud.version>
-		<spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
-		<spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+		<spring-boot.version>2.5.1</spring-boot.version>
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
+		<spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+		<spring-boot-admin.version>2.4.1</spring-boot-admin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
 		<spring.checkstyle.version>0.0.23</spring.checkstyle.version>
 		<git.commit.version>2.2.5</git.commit.version>
-		<docker.registry>harbor.cn:80</docker.registry>
+		<docker.registry>192.168.8.110:80</docker.registry>
 		<docker.host>http://192.168.8.110:2375</docker.host>
 		<docker.namespace>library</docker.namespace>
 		<docker.username>admin</docker.username>

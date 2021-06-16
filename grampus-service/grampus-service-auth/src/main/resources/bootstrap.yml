@@ -3,11 +3,9 @@ server:
 
 spring:
   application:
-    name: @artifactId@
+    name: "@artifactId@"
   profiles:
     active: dev
-  codec:
-    max-in-memory-size: 30MB
   cloud:
     nacos:
       discovery:
@@ -15,11 +13,13 @@ spring:
         metadata:
           management:
             context-path: /actuator
-        namespace: ${NACOS-NAMESPACE:}
+        namespace: ${NACOS-NAMESPACE:grampus-cloud}
+        group: ${NACOS-GROUP:grampus-cloud-group}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        group: ${NACOS-CONFIG-GROUP:GRAMPUS_CLOUD_GROUP}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
         shared-configs:
           - data-id: common-config.${spring.cloud.nacos.config.file-extension}
             group: ${spring.cloud.nacos.config.group}
@@ -40,7 +40,8 @@ spring:
         ds1:
           nacos:
             server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+            namespace: ${spring.cloud.nacos.discovery.namespace}
             dataId: sentinel-${spring.application.name}
-            groupId: GRAMPUS_SENTINEL_GROUP
+            groupId: sentinel-${spring.cloud.nacos.discovery.group}
             data-type: json
             rule-type: flow
