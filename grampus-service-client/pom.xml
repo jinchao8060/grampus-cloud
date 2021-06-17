@@ -16,4 +16,11 @@
 		<module>grampus-client-auth</module>
         <module>grampus-client-admin</module>
     </modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+	</dependencies>
 </project>

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin/test")
 public class AdminTestController {
 
-	@GetMapping("/demo")
+	@PostMapping("/demo")
 	public Result<String> demo() {
 		String text = "admin test demo";
 		return Result.success(text);

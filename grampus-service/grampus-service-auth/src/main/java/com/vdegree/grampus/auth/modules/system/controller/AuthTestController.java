@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/test")
 public class AuthTestController {
 
-	@RequestMapping("/demo")
+	@PostMapping("/demo")
 	public Result<Object> demo() {
 		String text = "auth test demo";
 		return Result.success(text);
