@@ -11,4 +11,10 @@
 
     <artifactId>grampus-service-admin</artifactId>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-cloud</artifactId>
+		</dependency>
+	</dependencies>
 </project>

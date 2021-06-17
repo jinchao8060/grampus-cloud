@@ -19,5 +19,4 @@ public class GrampusAuthApplication {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         SpringApplication.run(GrampusAuthApplication.class, args);
     }
-
 }
