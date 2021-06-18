@@ -1,6 +1,7 @@
 package com.vdegree.grampus.auth.modules.system.controller;
 
 import com.vdegree.grampus.common.core.result.Result;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

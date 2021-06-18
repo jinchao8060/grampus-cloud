@@ -1,6 +1,8 @@
 package com.vdegree.grampus.auth.modules.system.client.feign;
 
+import com.vdegree.grampus.common.core.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * RemoteAuthTestClient
@@ -9,8 +11,8 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @since 2021-06-17
  */
 @FeignClient(contextId="remoteAuthTestClient", name = "grampus-service-auth")
-public class RemoteAuthTestClient {
+public interface RemoteAuthTestClient {
 
 	@PostMapping("/auth/test/demo")
-	public Result<Object> demo();
+	Result<Object> demo();
 }
