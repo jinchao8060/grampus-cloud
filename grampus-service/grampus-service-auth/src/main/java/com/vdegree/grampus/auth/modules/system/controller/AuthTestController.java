@@ -2,6 +2,7 @@ package com.vdegree.grampus.auth.modules.system.controller;
 
 import com.vdegree.grampus.admin.modules.system.client.dto.TestTxDTO;
 import com.vdegree.grampus.admin.modules.system.client.feign.RemoteTestTxClient;
+import com.vdegree.grampus.auth.modules.system.service.TestTxService;
 import com.vdegree.grampus.common.core.result.Result;
 import com.vdegree.grampus.common.mybatis.page.PageData;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ import java.util.Map;
 public class AuthTestController {
 
 	private final RemoteTestTxClient remoteTestTxClient;
+	private final TestTxService testTxService;
 
 	@PostMapping("/demo")
 	public Result<Object> demo() {
@@ -46,6 +48,12 @@ public class AuthTestController {
 	@PostMapping("/update")
 	public Result<Void> txUpdate(@RequestBody TestTxDTO testTxDTO) {
 		remoteTestTxClient.update(testTxDTO);
+		return Result.success();
+	}
+
+	@PostMapping("/test")
+	public Result<Void> test(@RequestBody TestTxDTO testTxDTO) {
+		testTxService.update(testTxDTO);
 		return Result.success();
 	}
 
