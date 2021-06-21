@@ -46,21 +46,18 @@ public class TestTxController {
 	}
 
 	@PostMapping
-	@GlobalTransactional
 	public Result<Void> save(@RequestBody TestTxDTO params) {
 		testTxService.save(params);
 		return Result.success();
 	}
 
 	@PutMapping
-	@GlobalTransactional
 	public Result<Void> update(@RequestBody TestTxDTO params) {
 		testTxService.modifyById(params);
 		return Result.success();
 	}
 
 	@DeleteMapping("/{id}")
-	@GlobalTransactional
 	public Result<Void> delete(@PathVariable Long id) {
 		testTxService.deleteById(id);
 		return Result.success();
