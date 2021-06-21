@@ -15,16 +15,19 @@
 	<modules>
 		<module>grampus-client-auth</module>
         <module>grampus-client-admin</module>
+		<module>grampus-client-dependencies</module>
     </modules>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-core</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>

@@ -45,3 +45,21 @@ spring:
             groupId: sentinel-${spring.cloud.nacos.discovery.group}
             data-type: json
             rule-type: flow
+
+feign:
+  sentinel:
+    enabled: true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 15000
+        readTimeout: 15000

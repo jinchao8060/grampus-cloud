@@ -2,6 +2,7 @@ package com.vdegree.grampus.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.util.TimeZone;
 
@@ -11,6 +12,7 @@ import java.util.TimeZone;
  * @author Beck
  * @since 2021-06-15
  */
+@EnableFeignClients(basePackages = {"com.vdegree.grampus"})
 @SpringBootApplication
 public class GrampusAuthApplication {
 

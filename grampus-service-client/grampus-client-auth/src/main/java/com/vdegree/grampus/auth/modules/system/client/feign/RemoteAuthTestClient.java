@@ -14,5 +14,5 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface RemoteAuthTestClient {
 
 	@PostMapping("/auth/test/demo")
-	Result<Object> demo();
+	Result<String> demo();
 }

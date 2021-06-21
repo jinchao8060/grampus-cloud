@@ -65,6 +65,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.vdegree</groupId>
+				<artifactId>grampus-client-dependencies</artifactId>
+				<version>${grampus.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
