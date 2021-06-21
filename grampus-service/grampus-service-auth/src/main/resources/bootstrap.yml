@@ -14,7 +14,7 @@ spring:
           management:
             context-path: /actuator
         namespace: ${NACOS-NAMESPACE:grampus-cloud}
-        group: ${NACOS-GROUP:grampus-cloud-group}
+        group: ${NACOS-GROUP:GRAMPUS_GROUP}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
@@ -52,18 +52,19 @@ seata:
   service:
     vgroup-mapping:
       grampus-service-admin-group: default
-  config:
-    type: nacos
-    nacos:
-      serverAddr: 127.0.0.1:8848
-      group: SEATA_GROUP
-      namespace: grampus-seata
   registry:
     type: nacos
     nacos:
-      application: seata-server
-      server-addr: 127.0.0.1:8848
-      namespace: grampus-seata
+      application: ${NACOS-SEATA-APPLICATION:seata-server}
+      server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+      group: ${NACOS-SEATA-GROUP:SEATA_GROUP}
+      namespace: ${NACOS-SEATA-NAMESPACE:grampus-seata}
+  config:
+    type: ${seata.registry.type}
+    nacos:
+      serverAddr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+      group: ${NACOS-SEATA-GROUP:SEATA_GROUP}
+      namespace: ${seata.registry.nacos.namespace}
 
 feign:
   sentinel:

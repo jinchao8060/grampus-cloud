@@ -16,7 +16,7 @@ spring:
           management:
             context-path: /actuator
         namespace: ${NACOS-NAMESPACE:grampus-cloud}
-        group: ${NACOS-GROUP:grampus-cloud-group}
+        group: ${NACOS-GROUP:GRAMPUS_GROUP}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
