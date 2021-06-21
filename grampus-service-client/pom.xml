@@ -29,5 +29,10 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-mybatis</artifactId>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>

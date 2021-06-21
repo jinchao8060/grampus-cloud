@@ -46,6 +46,34 @@ spring:
             data-type: json
             rule-type: flow
 
+# seata配置
+seata:
+  # 默认关闭，如需启用spring.datasource.dynami.seata需要同时开启
+  enabled: false
+  # Seata 应用编号，默认为 ${spring.application.name}
+  application-id: ${spring.application.name}
+  # Seata 事务组编号，用于 TC 集群名
+  tx-service-group: ${spring.application.name}-group
+  # 关闭自动代理
+  enable-auto-data-source-proxy: false
+  # 服务配置项
+  service:
+    # 虚拟组和分组的映射
+    vgroup-mapping:
+      grampus-service-admin-group: default
+  config:
+    type: nacos
+    nacos:
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: grampus-seata
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      namespace: grampus-seata
+
 feign:
   sentinel:
     enabled: true
@@ -63,3 +91,33 @@ feign:
       default:
         connectTimeout: 15000
         readTimeout: 15000
+
+mybatis:
+  configuration:
+    # 下划线转驼峰
+    map-underscore-to-camel-case: true
+  # 搜索指定包别名
+  typeAliasesPackage: com.vdegree.grampus.*.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:/mapper/**/*.xml
+
+# mybatis增强配置
+mapper:
+  not-empty: false
+  style: camelhump
+  identity: MYSQL
+  wrap-keyword: "`{0}`"
+  safe-delete: true
+  safe-update: true
+  idgenerator:
+    snowflake:
+      workerId: 4
+      dataCenterId: 8
+
+# PageHelper分页插件
+pagehelper:
+  auto-dialect: true
+  helper-dialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

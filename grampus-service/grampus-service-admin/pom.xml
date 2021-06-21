@@ -18,6 +18,14 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-client-admin</artifactId>
 		</dependency>
 		<dependency>
