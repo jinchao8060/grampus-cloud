@@ -46,7 +46,6 @@ spring:
             data-type: json
             rule-type: flow
 
-# seata配置
 seata:
   application-id: ${spring.application.name}
   tx-service-group: ${spring.application.name}-group

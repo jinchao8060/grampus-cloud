@@ -46,12 +46,10 @@ spring:
             data-type: json
             rule-type: flow
 
-# seata配置
 seata:
   application-id: ${spring.application.name}
   tx-service-group: ${spring.application.name}-group
   service:
-    # 虚拟组和分组的映射
     vgroup-mapping:
       grampus-service-admin-group: default
   config:
