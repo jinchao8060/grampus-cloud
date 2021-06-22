@@ -48,10 +48,10 @@ spring:
 
 seata:
   application-id: ${spring.application.name}
-  tx-service-group: ${spring.application.name}-group
+  tx-service-group: grampus_tx_group
   service:
     vgroup-mapping:
-      grampus-service-admin-group: default
+      grampus_tx_group: default
   registry:
     type: nacos
     nacos:
