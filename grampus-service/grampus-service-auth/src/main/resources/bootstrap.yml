@@ -13,8 +13,8 @@ spring:
         metadata:
           management:
             context-path: /actuator
-        namespace: ${NACOS-NAMESPACE:grampus-cloud}
-        group: ${NACOS-GROUP:GRAMPUS_GROUP}
+        namespace: grampus-cloud
+        group: GRAMPUS_CLOUD_GROUP
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
@@ -39,7 +39,7 @@ spring:
       datasource:
         ds1:
           nacos:
-            server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
             namespace: ${spring.cloud.nacos.discovery.namespace}
             dataId: sentinel-${spring.application.name}
             groupId: sentinel-${spring.cloud.nacos.discovery.group}
@@ -48,17 +48,17 @@ spring:
 
 seata:
   application-id: ${spring.application.name}
-  tx-service-group: ${SEATA-TX-GROUP:grampus_tx_group}
+  tx-service-group: grampus_tx_group
   service:
     vgroup-mapping:
       grampus_tx_group: default
   registry:
-    type: ${SEATA-REGISTRY-TYPE:nacos}
+    type: nacos
     nacos:
       application: ${NACOS-SEATA-APPLICATION:seata-server}
       server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
-      group: ${NACOS-SEATA-GROUP:SEATA_GROUP}
-      namespace: ${NACOS-SEATA-NAMESPACE:grampus-seata}
+      group: GRAMPUS_SEATA_GROUP
+      namespace: grampus-seata
   config:
     type: ${seata.registry.type}
     nacos:
