@@ -103,8 +103,8 @@ mapper:
   safe-update: true
   idgenerator:
     snowflake:
-      workerId: 4
       dataCenterId: 8
+      workerId: 4
 
 # PageHelper分页插件
 pagehelper:
