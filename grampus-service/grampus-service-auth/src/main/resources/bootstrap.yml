@@ -48,12 +48,12 @@ spring:
 
 seata:
   application-id: ${spring.application.name}
-  tx-service-group: grampus_tx_group
+  tx-service-group: ${SEATA-TX-GROUP:grampus_tx_group}
   service:
     vgroup-mapping:
       grampus_tx_group: default
   registry:
-    type: nacos
+    type: ${SEATA-REGISTRY-TYPE:nacos}
     nacos:
       application: ${NACOS-SEATA-APPLICATION:seata-server}
       server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
@@ -62,8 +62,8 @@ seata:
   config:
     type: ${seata.registry.type}
     nacos:
-      serverAddr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
-      group: ${NACOS-SEATA-GROUP:SEATA_GROUP}
+      serverAddr: ${seata.registry.nacos.server-addr}
+      group: ${seata.registry.nacos.group}
       namespace: ${seata.registry.nacos.namespace}
 
 feign:
