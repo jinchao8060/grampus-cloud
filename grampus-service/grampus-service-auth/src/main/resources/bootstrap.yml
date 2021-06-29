@@ -13,6 +13,8 @@ spring:
         metadata:
           management:
             context-path: /actuator
+          gray:
+            version: @version@
         namespace: grampus-cloud
         group: GRAMPUS_CLOUD_GROUP
       config:
