@@ -1,7 +1,7 @@
 package com.vdegree.grampus.gateway.filter;
 
 import com.google.common.collect.Maps;
-import com.vdegree.grampus.common.core.exception.BaseException;
+import com.vdegree.grampus.common.core.exception.ApiException;
 import com.vdegree.grampus.common.core.utils.JSONUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import com.vdegree.grampus.common.core.utils.crypto.DigestUtil;
@@ -68,7 +68,7 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			if (StringUtil.isBlank(platform)) {
 				log.info("RequestNonceFilter refuse. platform invalidation. uri:{}, ip:{}",
 					request.getURI(), WebFluxUtil.getIpAddress(request));
-				throw new BaseException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "platform invalidation.");
+				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "platform invalidation.");
 			}
 
 			// timestamp invalidation.
@@ -76,14 +76,14 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			if (System.currentTimeMillis() > Long.parseLong(ts) + REQUEST_EXPIRE_TIME) {
 				log.info("RequestNonceFilter refuse. ts invalidation. uri:{}, ip:{}",
 					request.getURI(), WebFluxUtil.getIpAddress(request));
-				throw new BaseException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "timestamp invalidation.");
+				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "timestamp invalidation.");
 			}
 
 			// encryptKey is null.
 			if (StringUtil.isBlank(encryptKey)) {
 				log.info("RequestNonceFilter refuse. EncryptKey is null. uri:{}, ip:{}",
 					request.getURI(), WebFluxUtil.getIpAddress(request));
-				throw new BaseException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "encryptKey is null.");
+				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "encryptKey is null.");
 			}
 
 			// signature mismatch.
@@ -92,7 +92,7 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			if (!signKey.equals(sign)) {
 				log.info("RequestNonceFilter refuse. Signature-Key exception. uri:{}, ip:{}, signKey:{}, realSignKey:{}, nonceStr:{}, encryptKey:{} aesKey:{}",
 					request.getURI(), WebFluxUtil.getIpAddress(request), signKey, sign, nonceStr, headers.getFirst("Encrypt-Key"), aesKey);
-				throw new BaseException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "signature mismatch.");
+				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "signature mismatch.");
 			}
 
 //			// nonce repeat.
@@ -101,7 +101,7 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 //			if (isContainsNonce) {
 //				log.info("RequestNonceFilter refuse. nonce repeat. uri:{}, ip:{}, nonceStr:{}",
 //					request.getURI(), WebFluxUtil.getIpAddress(request), nonceStr);
-//				throw new BaseException(ErrorCode.REFUSE_ERROR_CODE);
+//				throw new ApiException(ErrorCode.REFUSE_ERROR_CODE);
 //			} else {
 //				nonceTimeCache.put(nonceCacheKey, System.currentTimeMillis());
 //			}

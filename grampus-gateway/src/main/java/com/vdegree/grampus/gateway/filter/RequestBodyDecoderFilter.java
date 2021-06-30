@@ -1,7 +1,7 @@
 package com.vdegree.grampus.gateway.filter;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.vdegree.grampus.common.core.exception.BaseException;
+import com.vdegree.grampus.common.core.exception.ApiException;
 import com.vdegree.grampus.common.core.utils.JSONUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import com.vdegree.grampus.common.core.utils.crypto.AESUtil;
@@ -87,12 +87,12 @@ public class RequestBodyDecoderFilter extends AbstractGatewayFilterFactory {
 			if (isEncryptRequest || pathMatcher(requestUri, filterUris)) {
 				if (StringUtil.isBlank(encryptKey)) {
 					log.error("RequestBodyDecoderFilter error. encryptKey is null. imei:{} privateKey:{} encryptKey:{}", request.getHeaders().getFirst("imei"), privateKey, encryptKey);
-					throw new BaseException(ErrorCode.Gateway.GATEWAY_PARAMS_DECODE_ERROR.getCode(), "encryptKey is null.");
+					throw new ApiException(ErrorCode.Gateway.GATEWAY_PARAMS_DECODE_ERROR.getCode(), "encryptKey is null.");
 				}
 				String aesKey = RSAUtil.decryptFromBase64(privateKey, encryptKey);
 				if (StringUtil.isBlank(aesKey)) {
 					log.error("RequestBodyDecoderFilter error. aesKey is null. imei:{} privateKey:{} encryptKey:{}", request.getHeaders().getFirst("imei"), privateKey, encryptKey);
-					throw new BaseException(ErrorCode.Gateway.GATEWAY_PARAMS_DECODE_ERROR.getCode(), "encryptKey is error.");
+					throw new ApiException(ErrorCode.Gateway.GATEWAY_PARAMS_DECODE_ERROR.getCode(), "encryptKey is error.");
 				}
 				// modify request body
 				Class inClass = String.class;

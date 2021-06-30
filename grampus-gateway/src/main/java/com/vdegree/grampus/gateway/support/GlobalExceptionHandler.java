@@ -1,7 +1,7 @@
 package com.vdegree.grampus.gateway.support;
 
 import com.google.common.collect.Maps;
-import com.vdegree.grampus.common.core.exception.BaseException;
+import com.vdegree.grampus.common.core.exception.ApiException;
 import com.vdegree.grampus.common.core.result.Result;
 import com.vdegree.grampus.common.core.utils.JSONUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
@@ -43,8 +43,8 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         log.info("GLOBAL EXCEPTION:{}\n message:{}\n",
 			exchange.getRequest().getPath(), throwable.getMessage(), throwable.getSuppressed()[0]);
 		Result<Object> result;
-        if (throwable instanceof BaseException) {
-			result = Result.error(((BaseException) throwable).getCode(), null);
+        if (throwable instanceof ApiException) {
+			result = Result.error(((ApiException) throwable).getCode(), null);
         } else {
 			result = Result.error(ErrorCode.Global.UNKNOWN_ERROR_CODE.getCode(), ErrorCode.Global.UNKNOWN_ERROR_CODE.getMsg());
 		}
