@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
-@FeignClient(contextId="remoteTestTxClient", value = "grampus-service-admin", path = "/testTx")
+@FeignClient(contextId="remoteTestTxClient", value = "grampus-service-admin", path = "/admin/testTx")
 public interface RemoteTestTxClient {
 
 	@GetMapping("page")

@@ -5,7 +5,7 @@ spring:
   application:
     name: "@artifactId@"
   profiles:
-    active: dev
+    active: "@profiles.active@"
   codec:
     max-in-memory-size: 30MB
   cloud:
@@ -16,7 +16,7 @@ spring:
           management:
             context-path: /actuator
         namespace: ${NACOS-NAMESPACE:grampus-cloud}
-        group: ${NACOS-GROUP:GRAMPUS_GROUP}
+        group: GRAMPUS_CLOUD_GROUP
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
@@ -41,7 +41,7 @@ spring:
       datasource:
         ds1:
           nacos:
-            server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
             namespace: ${spring.cloud.nacos.discovery.namespace}
             dataId: sentinel-${spring.application.name}
             groupId: sentinel-${spring.cloud.nacos.discovery.group}

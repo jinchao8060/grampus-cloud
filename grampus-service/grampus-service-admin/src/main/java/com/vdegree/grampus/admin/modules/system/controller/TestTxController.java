@@ -2,7 +2,6 @@ package com.vdegree.grampus.admin.modules.system.controller;
 
 import com.vdegree.grampus.common.core.result.Result;
 import com.vdegree.grampus.common.mybatis.page.PageData;
-import io.seata.spring.annotation.GlobalTransactional;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +27,7 @@ import java.util.Map;
 @Api(tags = "")
 @RestController
 @AllArgsConstructor
-@RequestMapping("testTx")
+@RequestMapping("/admin/testTx")
 public class TestTxController {
 
 	private final TestTxService testTxService;
