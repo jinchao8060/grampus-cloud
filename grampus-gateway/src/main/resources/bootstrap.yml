@@ -47,3 +47,15 @@ spring:
             groupId: sentinel-${spring.cloud.nacos.discovery.group}
             data-type: json
             rule-type: flow
+    gateway:
+      routes:
+        - id: grampus-service-auth
+          uri: lb://grampus-service-auth
+          predicates:
+            - Path=/auth/**
+          order: 100
+        - id: grampus-service-admin
+          uri: lb://grampus-service-admin
+          predicates:
+            - Path=/admin/**
+          order: 99
