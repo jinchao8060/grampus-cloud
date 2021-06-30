@@ -16,14 +16,14 @@ import java.util.List;
 @RefreshScope
 @ConfigurationProperties(prefix = "decrypt")
 public class URIDecoderProperties {
-    /**
-     * 服务端私钥
-     */
-    private String privateKey;
-    /**
-     * 客户端公钥
-     */
-    private String publicKey;
+	/**
+	 * 服务端私钥
+	 */
+	private String privateKey;
+	/**
+	 * 客户端公钥
+	 */
+	private String publicKey;
 	/**
 	 * admin端私钥
 	 */
@@ -32,20 +32,20 @@ public class URIDecoderProperties {
 	 * admin端公钥
 	 */
 	private String adminPublicKey;
-    /**
-     * header字段名
-     */
-    private String headerName;
-    /**
-     * requestBody的JSON字段(加密后的密文)
-     */
-    private String cipherField;
-    /**
-     * 过滤URL(强制解析链接)
-     */
-    private List<String> urls;
-    /**
-     * 响应URL忽略加密(强制关闭链接的响应数据加密)
-     */
-    private List<String> responseIgnoreUrls;
+	/**
+	 * header字段名
+	 */
+	private String headerName;
+	/**
+	 * requestBody的JSON字段(加密后的密文)
+	 */
+	private String cipherField;
+	/**
+	 * 过滤URL(强制解析链接)
+	 */
+	private List<String> urls;
+	/**
+	 * 响应URL忽略加密(强制关闭链接的响应数据加密)
+	 */
+	private List<String> responseIgnoreUrls;
 }

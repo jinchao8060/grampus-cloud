@@ -16,10 +16,10 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class GrampusGatewayApplication {
 
-    public static void main(String[] args) {
-        System.setProperty("csp.sentinel.app.type", "1");
-        System.setProperty("user.timezone", "UTC");
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        SpringApplication.run(GrampusGatewayApplication.class, args);
-    }
+	public static void main(String[] args) {
+		System.setProperty("csp.sentinel.app.type", "1");
+		System.setProperty("user.timezone", "UTC");
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+		SpringApplication.run(GrampusGatewayApplication.class, args);
+	}
 }

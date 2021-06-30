@@ -21,12 +21,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class RequestRefuseFilter extends AbstractGatewayFilterFactory {
 
-    @Override
-    public GatewayFilter apply(Object config) {
-        return (exchange, chain) -> {
-            ServerHttpRequest request = exchange.getRequest();
-            log.info("request refuse uri:{}, ip:{}", request.getURI(), WebFluxUtil.getIpAddress(request));
+	@Override
+	public GatewayFilter apply(Object config) {
+		return (exchange, chain) -> {
+			ServerHttpRequest request = exchange.getRequest();
+			log.info("request refuse uri:{}, ip:{}", request.getURI(), WebFluxUtil.getIpAddress(request));
 			throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "illegal request.");
-        };
-    }
+		};
+	}
 }

@@ -49,7 +49,7 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			String signKey = headers.getFirst("Signature-Key");
 			String encryptKey = request.getHeaders().getFirst(uriDecoderProperties.getHeaderName());
 			String privateKey = RequestPlatformEnum.ADMIN.getPlatform().equals(platform) ?
-				uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
+					uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
 
 			Map<String, String> params = Maps.newLinkedHashMap();
 			params.put("Platform", platform);
@@ -67,7 +67,7 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			// platform invalidation.
 			if (StringUtil.isBlank(platform)) {
 				log.info("RequestNonceFilter refuse. platform invalidation. uri:{}, ip:{}",
-					request.getURI(), WebFluxUtil.getIpAddress(request));
+						request.getURI(), WebFluxUtil.getIpAddress(request));
 				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "platform invalidation.");
 			}
 
@@ -75,14 +75,14 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			assert ts != null;
 			if (System.currentTimeMillis() > Long.parseLong(ts) + REQUEST_EXPIRE_TIME) {
 				log.info("RequestNonceFilter refuse. ts invalidation. uri:{}, ip:{}",
-					request.getURI(), WebFluxUtil.getIpAddress(request));
+						request.getURI(), WebFluxUtil.getIpAddress(request));
 				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "timestamp invalidation.");
 			}
 
 			// encryptKey is null.
 			if (StringUtil.isBlank(encryptKey)) {
 				log.info("RequestNonceFilter refuse. EncryptKey is null. uri:{}, ip:{}",
-					request.getURI(), WebFluxUtil.getIpAddress(request));
+						request.getURI(), WebFluxUtil.getIpAddress(request));
 				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "encryptKey is null.");
 			}
 
@@ -91,7 +91,7 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 			String sign = DigestUtil.hmacSha256Hex(nonceStr, aesKey);
 			if (!signKey.equals(sign)) {
 				log.info("RequestNonceFilter refuse. Signature-Key exception. uri:{}, ip:{}, signKey:{}, realSignKey:{}, nonceStr:{}, encryptKey:{} aesKey:{}",
-					request.getURI(), WebFluxUtil.getIpAddress(request), signKey, sign, nonceStr, headers.getFirst("Encrypt-Key"), aesKey);
+						request.getURI(), WebFluxUtil.getIpAddress(request), signKey, sign, nonceStr, headers.getFirst("Encrypt-Key"), aesKey);
 				throw new ApiException(ErrorCode.Gateway.GATEWAY_REQUEST_REFUSE_ERROR.getCode(), "signature mismatch.");
 			}
 

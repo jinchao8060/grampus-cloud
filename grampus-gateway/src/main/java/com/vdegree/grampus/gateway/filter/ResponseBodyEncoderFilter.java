@@ -80,7 +80,7 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 	public GatewayFilter apply(Object ignore) {
 		Config config = new Config();
 		return new ModifyResponseGatewayFilter(
-			config.setRewriteFunction(Object.class, Object.class, getRewriteFunction()));
+				config.setRewriteFunction(Object.class, Object.class, getRewriteFunction()));
 	}
 
 	private RewriteFunction<Object, Object> getRewriteFunction() {
@@ -91,7 +91,7 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			String platform = request.getHeaders().getFirst("Platform");
 			String requestUri = request.getPath().pathWithinApplication().value();
 			String privateKey = RequestPlatformEnum.ADMIN.getPlatform().equals(platform) ?
-				uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
+					uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
 			List<String> responseIgnoreUris = uriDecoderProperties.getResponseIgnoreUrls();
 			// if request header contains Encrypt-Key or uri not match responseIgnoreUris, then encrypt
 			boolean isIgnoreUris = responseIgnoreUris != null && pathMatcher(requestUri, responseIgnoreUris);
@@ -188,7 +188,7 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 		}
 
 		public <T, R> Config setRewriteFunction(Class<T> inClass, Class<R> outClass,
-																					   RewriteFunction<T, R> rewriteFunction) {
+												RewriteFunction<T, R> rewriteFunction) {
 			setInClass(inClass);
 			setOutClass(outClass);
 			setRewriteFunction(rewriteFunction);
@@ -209,14 +209,14 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 
 		@Deprecated
 		public ModifyResponseGatewayFilter(Config config,
-                                           @Nullable ServerCodecConfigurer codecConfigurer) {
+										   @Nullable ServerCodecConfigurer codecConfigurer) {
 			this.config = config;
 		}
 
 		@Override
 		public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 			return chain.filter(exchange.mutate()
-				.response(new ModifiedServerHttpResponse(exchange, config)).build());
+					.response(new ModifiedServerHttpResponse(exchange, config)).build());
 		}
 
 		@SuppressWarnings("unchecked")
@@ -233,11 +233,11 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 		@Override
 		public String toString() {
 			Object obj = (this.gatewayFilterFactory != null) ? this.gatewayFilterFactory
-				: this;
+					: this;
 			return filterToStringCreator(obj)
-				.append("New content type", config.getNewContentType())
-				.append("In class", config.getInClass())
-				.append("Out class", config.getOutClass()).toString();
+					.append("New content type", config.getNewContentType())
+					.append("In class", config.getInClass())
+					.append("Out class", config.getOutClass()).toString();
 		}
 
 		public void setFactory(GatewayFilterFactory<Config> gatewayFilterFactory) {
@@ -264,13 +264,13 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			Class inClass = config.getInClass();
 			Class outClass = config.getInClass();
 			boolean isTextPlainContentType = exchange.getResponse()
-				.getHeaders().getContentType().includes(MediaType.TEXT_PLAIN);
+					.getHeaders().getContentType().includes(MediaType.TEXT_PLAIN);
 			if (isTextPlainContentType) {
 				inClass = String.class;
 			}
 
 			String originalResponseContentType = exchange
-				.getAttribute(ORIGINAL_RESPONSE_CONTENT_TYPE_ATTR);
+					.getAttribute(ORIGINAL_RESPONSE_CONTENT_TYPE_ATTR);
 			HttpHeaders httpHeaders = new HttpHeaders();
 			// explicitly add it in this way instead of
 			// 'httpHeaders.setContentType(originalResponseContentType)'
@@ -282,53 +282,53 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 
 			// TODO: flux or mono
 			Mono modifiedBody = extractBody(exchange, clientResponse, inClass)
-				.flatMap(originalBody -> config.getRewriteFunction().apply(exchange,
-					originalBody))
-				.switchIfEmpty(Mono.defer(() -> (Mono) config.getRewriteFunction()
-					.apply(exchange, null)));
+					.flatMap(originalBody -> config.getRewriteFunction().apply(exchange,
+							originalBody))
+					.switchIfEmpty(Mono.defer(() -> (Mono) config.getRewriteFunction()
+							.apply(exchange, null)));
 
 			if (isTextPlainContentType) {
 				BodyInserter bodyInserter = BodyInserters.fromPublisher(modifiedBody,
-					String.class);
+						String.class);
 				CachedBodyOutputMessage outputMessage = new CachedBodyOutputMessage(exchange,
-					exchange.getResponse().getHeaders());
+						exchange.getResponse().getHeaders());
 				return bodyInserter.insert(outputMessage, new BodyInserterContext())
+						.then(Mono.defer(() -> {
+							Mono<DataBuffer> messageBody = writeBody(getDelegate(),
+									outputMessage, String.class);
+							HttpHeaders headers = getDelegate().getHeaders();
+							if (!headers.containsKey(HttpHeaders.TRANSFER_ENCODING)
+									|| headers.containsKey(HttpHeaders.CONTENT_LENGTH)) {
+								messageBody = messageBody.doOnNext(data -> headers
+										.setContentLength(data.readableByteCount()));
+							}
+							// TODO: fail if isStreamingMediaType?
+							return getDelegate().writeWith(messageBody);
+						}));
+			}
+
+			BodyInserter bodyInserter = BodyInserters.fromPublisher(modifiedBody,
+					outClass);
+			CachedBodyOutputMessage outputMessage = new CachedBodyOutputMessage(exchange,
+					exchange.getResponse().getHeaders());
+			return bodyInserter.insert(outputMessage, new BodyInserterContext())
 					.then(Mono.defer(() -> {
 						Mono<DataBuffer> messageBody = writeBody(getDelegate(),
-							outputMessage, String.class);
+								outputMessage, outClass);
 						HttpHeaders headers = getDelegate().getHeaders();
 						if (!headers.containsKey(HttpHeaders.TRANSFER_ENCODING)
-							|| headers.containsKey(HttpHeaders.CONTENT_LENGTH)) {
+								|| headers.containsKey(HttpHeaders.CONTENT_LENGTH)) {
 							messageBody = messageBody.doOnNext(data -> headers
-								.setContentLength(data.readableByteCount()));
+									.setContentLength(data.readableByteCount()));
 						}
 						// TODO: fail if isStreamingMediaType?
 						return getDelegate().writeWith(messageBody);
 					}));
-			}
-
-			BodyInserter bodyInserter = BodyInserters.fromPublisher(modifiedBody,
-				outClass);
-			CachedBodyOutputMessage outputMessage = new CachedBodyOutputMessage(exchange,
-				exchange.getResponse().getHeaders());
-			return bodyInserter.insert(outputMessage, new BodyInserterContext())
-				.then(Mono.defer(() -> {
-					Mono<DataBuffer> messageBody = writeBody(getDelegate(),
-						outputMessage, outClass);
-					HttpHeaders headers = getDelegate().getHeaders();
-					if (!headers.containsKey(HttpHeaders.TRANSFER_ENCODING)
-						|| headers.containsKey(HttpHeaders.CONTENT_LENGTH)) {
-						messageBody = messageBody.doOnNext(data -> headers
-							.setContentLength(data.readableByteCount()));
-					}
-					// TODO: fail if isStreamingMediaType?
-					return getDelegate().writeWith(messageBody);
-				}));
 		}
 
 		@Override
 		public Mono<Void> writeAndFlushWith(
-			Publisher<? extends Publisher<? extends DataBuffer>> body) {
+				Publisher<? extends Publisher<? extends DataBuffer>> body) {
 			return writeWith(Flux.from(body).flatMapSequential(p -> p));
 		}
 
@@ -337,9 +337,9 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			List<HttpMessageReader<?>> messageReaders = codecConfigurer.getReaders();
 			ClientResponse.Builder builder;
 			builder = ClientResponse.create(exchange.getResponse().getStatusCode(),
-				messageReaders);
+					messageReaders);
 			return builder.headers(headers -> headers.putAll(httpHeaders))
-				.body(Flux.from(body)).build();
+					.body(Flux.from(body)).build();
 		}
 
 		private <T> Mono<T> extractBody(ServerWebExchange exchange,
@@ -351,17 +351,17 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			}
 
 			List<String> encodingHeaders = exchange.getResponse().getHeaders()
-				.getOrEmpty(HttpHeaders.CONTENT_ENCODING);
+					.getOrEmpty(HttpHeaders.CONTENT_ENCODING);
 			for (String encoding : encodingHeaders) {
 				MessageBodyDecoder decoder = messageBodyDecoders.get(encoding);
 				if (decoder != null) {
 					return clientResponse.bodyToMono(byte[].class)
-						.publishOn(Schedulers.parallel()).map(decoder::decode)
-						.map(bytes -> exchange.getResponse().bufferFactory()
-							.wrap(bytes))
-						.map(buffer -> prepareClientResponse(Mono.just(buffer),
-							exchange.getResponse().getHeaders()))
-						.flatMap(response -> response.bodyToMono(inClass));
+							.publishOn(Schedulers.parallel()).map(decoder::decode)
+							.map(bytes -> exchange.getResponse().bufferFactory()
+									.wrap(bytes))
+							.map(buffer -> prepareClientResponse(Mono.just(buffer),
+									exchange.getResponse().getHeaders()))
+							.flatMap(response -> response.bodyToMono(inClass));
 				}
 			}
 
@@ -376,7 +376,7 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			}
 
 			List<String> encodingHeaders = httpResponse.getHeaders()
-				.getOrEmpty(HttpHeaders.CONTENT_ENCODING);
+					.getOrEmpty(HttpHeaders.CONTENT_ENCODING);
 			for (String encoding : encodingHeaders) {
 				MessageBodyEncoder encoder = messageBodyEncoders.get(encoding);
 				if (encoder != null) {
@@ -408,8 +408,7 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			this.headers = headers;
 			if (body instanceof Flux) {
 				flux = (Flux) body;
-			}
-			else {
+			} else {
 				flux = ((Mono) body).flux();
 			}
 		}

@@ -67,8 +67,10 @@ public interface ErrorCode {
 		 */
 		UNKNOWN_ERROR_CODE("-1", "UNKNOWN_ERROR_CODE");
 
-		@Getter String code;
-		@Getter String msg;
+		@Getter
+		String code;
+		@Getter
+		String msg;
 	}
 
 	/**
@@ -85,8 +87,10 @@ public interface ErrorCode {
 		 */
 		GATEWAY_REQUEST_REFUSE_ERROR("101000P002", "GATEWAY_REQUEST_REFUSE_ERROR");
 
-		@Getter String code;
-		@Getter String msg;
+		@Getter
+		String code;
+		@Getter
+		String msg;
 	}
 
 	/**
@@ -117,7 +121,7 @@ public interface ErrorCode {
 		TOKEN_EXPIRED_ERROR("121201B005", "TOKEN_EXPIRED_ERROR"),
 		/**
 		 * token解析失败异常
- 		 */
+		 */
 		TOKEN_PARSED_ERROR("121201B006", "TOKEN_PARSED_ERROR"),
 
 		// ~ ============================ 通用权限管理相关 02 ============================
@@ -126,7 +130,9 @@ public interface ErrorCode {
 		 */
 		SUB_MENU_EXIST("121202B001", "SUB_MENU_EXIST");
 
-		@Getter String code;
-		@Getter String msg;
+		@Getter
+		String code;
+		@Getter
+		String msg;
 	}
 }

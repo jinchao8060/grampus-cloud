@@ -53,21 +53,21 @@ public class RequestBodyDecoderFilter extends AbstractGatewayFilterFactory {
 
 	private final ServerCodecConfigurer codecConfigurer;
 
-    private final URIDecoderProperties uriDecoderProperties;
+	private final URIDecoderProperties uriDecoderProperties;
 
-    private static AntPathMatcher antPathMatcher = new AntPathMatcher();
+	private static AntPathMatcher antPathMatcher = new AntPathMatcher();
 
 //    private static final String PRIVATE_KEY = "";
 //    private static final String PUBLIC_KEY = "";
 //
 //    private static final String REQUEST_HEADER_ENCRYPT_KEY = "Encrypt-Key";
 
-    @Override
-    public GatewayFilter apply(Object config) {
-        return new ModifyRequestGatewayFilter();
-    }
+	@Override
+	public GatewayFilter apply(Object config) {
+		return new ModifyRequestGatewayFilter();
+	}
 
-    public class ModifyRequestGatewayFilter implements GatewayFilter {
+	public class ModifyRequestGatewayFilter implements GatewayFilter {
 
 		@Override
 		public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -81,9 +81,9 @@ public class RequestBodyDecoderFilter extends AbstractGatewayFilterFactory {
 			String encryptKey = request.getHeaders().getFirst(headerName);
 			MediaType mediaType = request.getHeaders().getContentType();
 			String privateKey = RequestPlatformEnum.ADMIN.getPlatform().equals(platform) ?
-				uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
+					uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
 			boolean isEncryptRequest = StringUtil.isNotBlank(encryptKey)
-				&& MediaType.APPLICATION_JSON.equals(mediaType);
+					&& MediaType.APPLICATION_JSON.equals(mediaType);
 			if (isEncryptRequest || pathMatcher(requestUri, filterUris)) {
 				if (StringUtil.isBlank(encryptKey)) {
 					log.error("RequestBodyDecoderFilter error. encryptKey is null. imei:{} privateKey:{} encryptKey:{}", request.getHeaders().getFirst("imei"), privateKey, encryptKey);
@@ -101,7 +101,7 @@ public class RequestBodyDecoderFilter extends AbstractGatewayFilterFactory {
 				ServerRequest serverRequest = ServerRequest.create(exchange, messageReaders);
 				// decrypt
 				Mono<?> modifiedBody = serverRequest.bodyToMono(inClass).flatMap(
-					text -> Mono.just(decryptRequestBody(aesKey, (String)text, cipherField)));
+						text -> Mono.just(decryptRequestBody(aesKey, (String) text, cipherField)));
 				BodyInserter bodyInserter = BodyInserters.fromPublisher(modifiedBody, outClass);
 				HttpHeaders headers = new HttpHeaders();
 				headers.putAll(exchange.getRequest().getHeaders());
@@ -119,47 +119,46 @@ public class RequestBodyDecoderFilter extends AbstractGatewayFilterFactory {
 		}
 	}
 
-    private String decryptRequestBody(String aesKey, String text, String field) {
-        JsonNode jsonNode =  JSONUtil.readTree(text);
-        if (jsonNode != null) {
-            return AESUtil.decryptFormBase64ToString(jsonNode.get(field).asText(), aesKey);
-        } else {
-            return AESUtil.decryptFormBase64ToString(text, aesKey);
-        }
-    }
+	private String decryptRequestBody(String aesKey, String text, String field) {
+		JsonNode jsonNode = JSONUtil.readTree(text);
+		if (jsonNode != null) {
+			return AESUtil.decryptFormBase64ToString(jsonNode.get(field).asText(), aesKey);
+		} else {
+			return AESUtil.decryptFormBase64ToString(text, aesKey);
+		}
+	}
 
-    private ServerHttpRequestDecorator decorate(ServerWebExchange exchange, HttpHeaders headers,
-                                                CachedBodyOutputMessage outputMessage) {
-        return new ServerHttpRequestDecorator(exchange.getRequest()) {
-            @Override
-            public HttpHeaders getHeaders() {
-                long contentLength = headers.getContentLength();
-                HttpHeaders httpHeaders = new HttpHeaders();
-                httpHeaders.putAll(super.getHeaders());
-                if (contentLength > 0) {
-                    httpHeaders.setContentLength(contentLength);
-                }
-                else {
-                    // TODO: this causes a 'HTTP/1.1 411 Length Required' // on
-                    // httpbin.org
-                    httpHeaders.set(HttpHeaders.TRANSFER_ENCODING, "chunked");
-                }
-                return httpHeaders;
-            }
+	private ServerHttpRequestDecorator decorate(ServerWebExchange exchange, HttpHeaders headers,
+												CachedBodyOutputMessage outputMessage) {
+		return new ServerHttpRequestDecorator(exchange.getRequest()) {
+			@Override
+			public HttpHeaders getHeaders() {
+				long contentLength = headers.getContentLength();
+				HttpHeaders httpHeaders = new HttpHeaders();
+				httpHeaders.putAll(super.getHeaders());
+				if (contentLength > 0) {
+					httpHeaders.setContentLength(contentLength);
+				} else {
+					// TODO: this causes a 'HTTP/1.1 411 Length Required' // on
+					// httpbin.org
+					httpHeaders.set(HttpHeaders.TRANSFER_ENCODING, "chunked");
+				}
+				return httpHeaders;
+			}
 
-            @Override
-            public Flux<DataBuffer> getBody() {
-                return outputMessage.getBody();
-            }
-        };
-    }
+			@Override
+			public Flux<DataBuffer> getBody() {
+				return outputMessage.getBody();
+			}
+		};
+	}
 
-    private boolean pathMatcher(String requestUri, List<String> urls){
-        for (String url : urls) {
-            if(antPathMatcher.match(url, requestUri)){
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean pathMatcher(String requestUri, List<String> urls) {
+		for (String url : urls) {
+			if (antPathMatcher.match(url, requestUri)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

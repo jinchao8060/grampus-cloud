@@ -38,25 +38,25 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
 	private final URIDecoderProperties uriDecoderProperties;
 
-    @Override
-    public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
-        log.info("GLOBAL EXCEPTION:{}\n message:{}\n",
-			exchange.getRequest().getPath(), throwable.getMessage(), throwable.getSuppressed()[0]);
+	@Override
+	public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
+		log.info("GLOBAL EXCEPTION:{}\n message:{}\n",
+				exchange.getRequest().getPath(), throwable.getMessage(), throwable.getSuppressed()[0]);
 
 		Result<Object> result;
-        if (throwable instanceof ApiException) {
+		if (throwable instanceof ApiException) {
 			result = Result.error(((ApiException) throwable).getCode(), null);
-        } else {
+		} else {
 			result = Result.error(ErrorCode.Global.UNKNOWN_ERROR_CODE.getCode(), ErrorCode.Global.UNKNOWN_ERROR_CODE.getMsg());
 		}
 
-        // encrypt response body
+		// encrypt response body
 		ServerHttpRequest request = exchange.getRequest();
 		String headerName = uriDecoderProperties.getHeaderName();
 		String encryptKey = request.getHeaders().getFirst(headerName);
 		String platform = request.getHeaders().getFirst("platform");
 		String privateKey = RequestPlatformEnum.ADMIN.getPlatform().equals(platform) ?
-			uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
+				uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
 		if (StringUtil.isNotBlank(encryptKey)) {
 			String aesKey = RSAUtil.decryptFromBase64(privateKey, encryptKey);
 			if (StringUtil.isNotBlank(aesKey)) {
@@ -66,6 +66,6 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 			}
 		}
 
-        return WebFluxUtil.errorResponse(exchange, result);
-    }
+		return WebFluxUtil.errorResponse(exchange, result);
+	}
 }
