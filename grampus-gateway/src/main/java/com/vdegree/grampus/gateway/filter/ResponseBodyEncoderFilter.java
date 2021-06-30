@@ -88,7 +88,7 @@ public class ResponseBodyEncoderFilter extends AbstractGatewayFilterFactory {
 			ServerHttpRequest request = exchange.getRequest();
 			String headerName = uriDecoderProperties.getHeaderName();
 			String encryptKey = request.getHeaders().getFirst(headerName);
-			String platform = request.getHeaders().getFirst("platform");
+			String platform = request.getHeaders().getFirst("Platform");
 			String requestUri = request.getPath().pathWithinApplication().value();
 			String privateKey = RequestPlatformEnum.ADMIN.getPlatform().equals(platform) ?
 				uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();

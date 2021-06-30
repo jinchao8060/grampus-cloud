@@ -42,6 +42,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
     public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
         log.info("GLOBAL EXCEPTION:{}\n message:{}\n",
 			exchange.getRequest().getPath(), throwable.getMessage(), throwable.getSuppressed()[0]);
+
 		Result<Object> result;
         if (throwable instanceof ApiException) {
 			result = Result.error(((ApiException) throwable).getCode(), null);
@@ -61,10 +62,10 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 			if (StringUtil.isNotBlank(aesKey)) {
 				Map cipherResult = Maps.newHashMap();
 				cipherResult.put("cipherText", AESUtil.encryptToBase64(JSONUtil.writeValueAsString(result), aesKey));
-				WebFluxUtil.response(exchange, cipherResult);
+				WebFluxUtil.errorResponse(exchange, cipherResult);
 			}
 		}
 
-        return WebFluxUtil.response(exchange, result);
+        return WebFluxUtil.errorResponse(exchange, result);
     }
 }

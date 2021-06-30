@@ -42,20 +42,20 @@ public class RequestNonceFilter extends AbstractGatewayFilterFactory {
 		return (exchange, chain) -> {
 			ServerHttpRequest request = exchange.getRequest();
 			HttpHeaders headers = request.getHeaders();
-			String ts = headers.getFirst("ts");
-			String imei = headers.getFirst("imei");
-			String nonce = headers.getFirst("nonce");
-			String platform = headers.getFirst("platform");
+			String ts = headers.getFirst("Ts");
+			String imei = headers.getFirst("Imei");
+			String nonce = headers.getFirst("Nonce");
+			String platform = headers.getFirst("Platform");
 			String signKey = headers.getFirst("Signature-Key");
 			String encryptKey = request.getHeaders().getFirst(uriDecoderProperties.getHeaderName());
 			String privateKey = RequestPlatformEnum.ADMIN.getPlatform().equals(platform) ?
 				uriDecoderProperties.getAdminPrivateKey() : uriDecoderProperties.getPrivateKey();
 
 			Map<String, String> params = Maps.newLinkedHashMap();
-			params.put("platform", platform);
-			params.put("imei", imei);
-			params.put("nonce", nonce);
-			params.put("ts", ts);
+			params.put("Platform", platform);
+			params.put("Imei", imei);
+			params.put("Nonce", nonce);
+			params.put("Ts", ts);
 			String nonceStr = JSONUtil.writeValueAsString(params);
 
 			boolean isNonceRequest = StringUtil.isNotBlank(signKey);
