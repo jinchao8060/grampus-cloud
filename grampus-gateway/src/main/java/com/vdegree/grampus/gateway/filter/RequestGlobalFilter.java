@@ -48,7 +48,7 @@ public class RequestGlobalFilter implements GlobalFilter, Ordered {
 						httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_SUBJECT,
 								JwtTokenUtil.getSubject(token));
 						httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_PLATFORM,
-								JwtTokenUtil.getClaim(token, RequestPlatformEnum.PLATFORM_KEY.getPlatformKey()));
+								JwtTokenUtil.getPlatform(token));
 					}
 				})
 				// 匹配路由规则重写header版本号

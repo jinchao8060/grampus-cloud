@@ -14,18 +14,29 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class JwtTokenUtil {
 
+	private static final String PLATFORM_KEY = "platform";
 	public static AuthTokenProperties authProperties;
 
 	/**
 	 * Get subject Info.
 	 *
 	 * @param token token
-	 * @return auth info
+	 * @return subject info
 	 */
 	public String getSubject(String token) {
 		Claims claims = Jwts.parserBuilder().setSigningKey(authProperties.getSecretKeyBytes()).build()
 				.parseClaimsJws(token).getBody();
 		return claims.getSubject();
+	}
+
+	/**
+	 * Get platform Info.
+	 *
+	 * @param token     token
+	 * @return platform
+	 */
+	public String getPlatform(String token) {
+		return getClaim(token, PLATFORM_KEY);
 	}
 
 	/**

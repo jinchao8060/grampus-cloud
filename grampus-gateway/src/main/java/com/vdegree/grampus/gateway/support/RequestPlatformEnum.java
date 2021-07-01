@@ -10,10 +10,6 @@ import lombok.Getter;
  */
 public enum RequestPlatformEnum {
 	/**
-	 * PLATFORM_KEY
-	 */
-	PLATFORM_KEY("platform"),
-	/**
 	 * API
 	 */
 	CLIENT("client"),
@@ -24,9 +20,6 @@ public enum RequestPlatformEnum {
 
 	@Getter
 	private String platform;
-
-	@Getter
-	private String platformKey;
 
 	RequestPlatformEnum(String platform) {
 		this.platform = platform;
