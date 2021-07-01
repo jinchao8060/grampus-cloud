@@ -53,6 +53,6 @@ public class GatewayConfig {
 
 	@Bean
 	public RequestPlatformEnum requestPlatformEnum() {
-		return RequestPlatformEnum.API;
+		return RequestPlatformEnum.CLIENT;
 	}
 }
