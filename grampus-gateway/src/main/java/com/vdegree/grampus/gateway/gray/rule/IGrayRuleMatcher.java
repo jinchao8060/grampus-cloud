@@ -9,7 +9,7 @@ import com.vdegree.grampus.gateway.gray.GrayRoutesProperties;
  * @author Beck
  * @since 2021-07-01
  */
-public interface IGrayRuleMatch {
+public interface IGrayRuleMatcher {
 
 	/**
 	 * 是否匹配规则

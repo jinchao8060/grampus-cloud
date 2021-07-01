@@ -3,7 +3,7 @@ package com.vdegree.grampus.gateway.gray;
 import com.vdegree.grampus.common.core.utils.JSONUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import com.vdegree.grampus.common.gray.constant.GrayLoadBalancerConstant;
-import com.vdegree.grampus.gateway.gray.rule.IGrayRuleMatch;
+import com.vdegree.grampus.gateway.gray.rule.IGrayRuleMatcher;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 public class GrayVersionRewriteConsumer implements Consumer<HttpHeaders> {
 
 	private final GrayRoutesProperties grayRoutesProperties;
-	private final List<IGrayRuleMatch> ruleMatches;
+	private final List<IGrayRuleMatcher> ruleMatchers;
 
 	@Override
 	public void accept(HttpHeaders httpHeaders) {
@@ -47,8 +47,8 @@ public class GrayVersionRewriteConsumer implements Consumer<HttpHeaders> {
 		}
 		List<GrayRoutesProperties.RuleConditionDefinition> ruleConditions = routes.get(requestInfo.getPlatform());
 		for (GrayRoutesProperties.RuleConditionDefinition ruleCondition : ruleConditions) {
-			for (IGrayRuleMatch ruleMatch : ruleMatches) {
-				if (ruleMatch.isMatch(ruleCondition, requestInfo)) {
+			for (IGrayRuleMatcher ruleMatcher : ruleMatchers) {
+				if (ruleMatcher.isMatch(ruleCondition, requestInfo)) {
 					log.debug("match ruleCondition:{}", ruleCondition);
 					return ruleCondition.getVersion();
 				}

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Order(1)
 @Component
-public class GraySubjectRuleMatch implements IGrayRuleMatch {
+public class GraySubjectRuleMatcher implements IGrayRuleMatcher {
 
 	@Override
 	public boolean isMatch(GrayRoutesProperties.RuleConditionDefinition ruleCondition, GrayRequestInfo requestInfo) {

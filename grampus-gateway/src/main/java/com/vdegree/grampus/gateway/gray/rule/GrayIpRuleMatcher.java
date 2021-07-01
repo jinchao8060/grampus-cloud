@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Order(2)
 @Component
-public class GrayIpRuleMatch implements IGrayRuleMatch {
+public class GrayIpRuleMatcher implements IGrayRuleMatcher {
 
 	@Override
 	public boolean isMatch(GrayRoutesProperties.RuleConditionDefinition ruleCondition, GrayRequestInfo requestInfo) {
