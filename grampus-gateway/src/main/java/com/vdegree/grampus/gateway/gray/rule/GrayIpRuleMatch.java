@@ -18,9 +18,9 @@ public class GrayIpRuleMatch implements IGrayRuleMatch {
 
 	@Override
 	public boolean isMatch(GrayRoutesProperties.RuleConditionDefinition ruleCondition, GrayRequestInfo requestInfo) {
-		String currentIp = requestInfo.getIp();
-		String ipStr = ruleCondition.getIp();
 		try {
+			String currentIp = requestInfo.getIp();
+			String ipStr = ruleCondition.getIp();
 			String[] ipArr = ipStr.split(",");
 			for (String ip : ipArr) {
 				if (StringUtil.isBlank(ip)) {
