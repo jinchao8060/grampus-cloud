@@ -21,6 +21,9 @@ public class GrayIpRuleMatch implements IGrayRuleMatch {
 		try {
 			String currentIp = requestInfo.getIp();
 			String ipStr = ruleCondition.getIp();
+			if (StringUtil.isBlank(ipStr)) {
+				return false;
+			}
 			String[] ipArr = ipStr.split(",");
 			for (String ip : ipArr) {
 				if (StringUtil.isBlank(ip)) {

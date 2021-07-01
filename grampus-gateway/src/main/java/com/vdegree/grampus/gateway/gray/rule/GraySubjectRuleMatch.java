@@ -1,5 +1,6 @@
 package com.vdegree.grampus.gateway.gray.rule;
 
+import com.vdegree.grampus.common.core.utils.StringUtil;
 import com.vdegree.grampus.gateway.gray.GrayRequestInfo;
 import com.vdegree.grampus.gateway.gray.GrayRoutesProperties;
 import org.springframework.core.annotation.Order;
@@ -20,6 +21,9 @@ public class GraySubjectRuleMatch implements IGrayRuleMatch {
 		try {
 			String currentSubject = requestInfo.getSubject();
 			String subjectStr = ruleCondition.getSubject();
+			if (StringUtil.isBlank(subjectStr)) {
+				return false;
+			}
 			String[] subjectArr = subjectStr.split(",");
 			for (String subject : subjectArr) {
 				boolean isMatch = subject.equals(currentSubject);

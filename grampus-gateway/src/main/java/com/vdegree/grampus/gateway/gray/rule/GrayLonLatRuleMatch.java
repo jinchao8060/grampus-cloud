@@ -23,6 +23,9 @@ public class GrayLonLatRuleMatch implements IGrayRuleMatch {
 			String currentLon = requestInfo.getLon();
 			String currentLat = requestInfo.getLat();
 			String lonlatStr = ruleCondition.getLonlat();
+			if (StringUtil.isBlank(lonlatStr)) {
+				return false;
+			}
 			String[] lonlatArr = lonlatStr.split(",");
 			for (String lonlat : lonlatArr) {
 				String[] lontlatArr = lonlat.split("#");
