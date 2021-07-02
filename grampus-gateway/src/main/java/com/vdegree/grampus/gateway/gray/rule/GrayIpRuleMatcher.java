@@ -32,8 +32,7 @@ public class GrayIpRuleMatcher implements IGrayRuleMatcher {
 				continue;
 			}
 			String ipSub = ip.replace("*", "");
-			boolean isMatch = curtIp.contains(ipSub);
-			if (isMatch) {
+			if (curtIp.contains(ipSub)) {
 				return true;
 			}
 		}
