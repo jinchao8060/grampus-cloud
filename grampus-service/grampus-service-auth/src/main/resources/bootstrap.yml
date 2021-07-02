@@ -58,7 +58,7 @@ seata:
     type: nacos
     nacos:
       application: ${NACOS-SEATA-APPLICATION:seata-server}
-      server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
       group: GRAMPUS_SEATA_GROUP
       namespace: grampus-seata
   config:
