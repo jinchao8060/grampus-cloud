@@ -18,21 +18,20 @@ public class GraySubjectRuleMatcher implements IGrayRuleMatcher {
 
 	@Override
 	public boolean isMatch(GrayRoutesProperties.RuleConditionDefinition ruleCondition, GrayRequestInfo requestInfo) {
-		try {
-			String currentSubject = requestInfo.getSubject();
-			String subjectStr = ruleCondition.getSubject();
-			if (StringUtil.isBlank(subjectStr)) {
-				return false;
-			}
-			String[] subjectArr = subjectStr.split(",");
-			for (String subject : subjectArr) {
-				boolean isMatch = subject.equals(currentSubject);
-				if (isMatch) {
-					return true;
-				}
-			}
-		} catch (Exception ignored) {
+		String curSubject = requestInfo.getSubject();
+		String subjectStr = ruleCondition.getSubject();
+		if (StringUtil.isBlank(curSubject) || StringUtil.isBlank(subjectStr)) {
 			return false;
+		}
+		String[] subjectArr = subjectStr.split(",");
+		if (subjectArr.length == 0) {
+			return false;
+		}
+		for (String subject : subjectArr) {
+			if (StringUtil.isNotBlank(subject)
+					&& subject.equals(curSubject)) {
+				return true;
+			}
 		}
 		return false;
 	}

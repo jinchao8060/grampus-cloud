@@ -19,36 +19,50 @@ public class GrayLonLatRuleMatcher implements IGrayRuleMatcher {
 
 	@Override
 	public boolean isMatch(GrayRoutesProperties.RuleConditionDefinition ruleCondition, GrayRequestInfo requestInfo) {
-		try {
-			String currentLon = requestInfo.getLon();
-			String currentLat = requestInfo.getLat();
-			String lonlatStr = ruleCondition.getLonlat();
-			if (StringUtil.isBlank(lonlatStr)) {
-				return false;
+		String curLon = requestInfo.getLon();
+		String curLat = requestInfo.getLat();
+		String lonlatStr = ruleCondition.getLonlat();
+		if (StringUtil.isBlank(curLon) || StringUtil.isBlank(curLat)
+				|| StringUtil.isBlank(lonlatStr)) {
+			return false;
+		}
+
+		String[] lonlatArr = lonlatStr.split(",");
+		if (lonlatArr.length == 0) {
+			return false;
+		}
+		for (String lonlat : lonlatArr) {
+			if (StringUtil.isBlank(lonlat)) {
+				continue;
 			}
-			String[] lonlatArr = lonlatStr.split(",");
-			for (String lonlat : lonlatArr) {
-				String[] lontlatArr = lonlat.split("#");
-				String lonStr = lontlatArr[0];
-				String latStr = lontlatArr[1];
-				String disStr = lontlatArr[2];
-				if (StringUtil.isBlank(lonStr) || StringUtil.isBlank(latStr) || StringUtil.isBlank(disStr)) {
-					return false;
-				}
+
+			String[] lontlatArr = lonlat.split("#");
+			if (lontlatArr.length < 3) {
+				continue;
+			}
+
+			String lonStr = lontlatArr[0];
+			String latStr = lontlatArr[1];
+			String disStr = lontlatArr[2];
+			if (StringUtil.isBlank(lonStr) || StringUtil.isBlank(latStr)
+					|| StringUtil.isBlank(disStr)) {
+				continue;
+			}
+
+			try {
 				double lon = Double.parseDouble(lonStr);
 				double lat = Double.parseDouble(latStr);
 				double disRange = Double.parseDouble(disStr);
 
-				double lonReq = Double.parseDouble(currentLon);
-				double latReq = Double.parseDouble(currentLat);
+				double lonReq = Double.parseDouble(curLon);
+				double latReq = Double.parseDouble(curLat);
 				double distance = GeoUtil.getDistance(lon, lat, lonReq, latReq);
 
 				if (distance <= disRange) {
 					return true;
 				}
+			} catch (NumberFormatException ignored) {
 			}
-		} catch (Exception ignored) {
-			return false;
 		}
 		return false;
 	}

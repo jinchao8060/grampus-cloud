@@ -18,25 +18,24 @@ public class GrayIpRuleMatcher implements IGrayRuleMatcher {
 
 	@Override
 	public boolean isMatch(GrayRoutesProperties.RuleConditionDefinition ruleCondition, GrayRequestInfo requestInfo) {
-		try {
-			String currentIp = requestInfo.getIp();
-			String ipStr = ruleCondition.getIp();
-			if (StringUtil.isBlank(ipStr)) {
-				return false;
-			}
-			String[] ipArr = ipStr.split(",");
-			for (String ip : ipArr) {
-				if (StringUtil.isBlank(ip)) {
-					continue;
-				}
-				String ipSub = ip.replace("*", "");
-				boolean isMatch = currentIp.contains(ipSub);
-				if (isMatch) {
-					return true;
-				}
-			}
-		} catch (Exception ignored) {
+		String curtIp = requestInfo.getIp();
+		String ipStr = ruleCondition.getIp();
+		if (StringUtil.isBlank(curtIp) || StringUtil.isBlank(ipStr)) {
 			return false;
+		}
+		String[] ipArr = ipStr.split(",");
+		if (ipArr.length == 0) {
+			return false;
+		}
+		for (String ip : ipArr) {
+			if (StringUtil.isBlank(ip)) {
+				continue;
+			}
+			String ipSub = ip.replace("*", "");
+			boolean isMatch = curtIp.contains(ipSub);
+			if (isMatch) {
+				return true;
+			}
 		}
 		return false;
 	}
