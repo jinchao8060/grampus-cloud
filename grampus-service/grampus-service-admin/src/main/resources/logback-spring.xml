@@ -14,6 +14,22 @@
 		</encoder>
 	</appender>
 
+	<appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${FILE_LOG_PATTERN}/${project.artifactId}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${FILE_LOG_PATTERN}/%d{yyyy-MM, aux}/${project.artifactId}.%d{yyyy-MM-dd}.%i.log.gz
+			</fileNamePattern>
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+	</appender>
+
 	<logger name="org.springframework" level="WARN"/>
 	<logger name="org.apache.shardingsphere" level="WARN"/>
 	<logger name="com.alibaba.nacos" level="OFF" additivity="false"/>
