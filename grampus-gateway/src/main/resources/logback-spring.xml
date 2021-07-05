@@ -43,9 +43,6 @@
 	<logger name="com.alibaba.nacos" level="OFF">
 		<appender-ref ref="STDOUT"/>
 	</logger>
-	<logger name="org.apache.dubbo.rpc.protocol.dubbo.LazyConnectExchangeClient" level="ERROR">
-		<appender-ref ref="STDOUT"/>
-	</logger>
 	<logger name="org.springframework.context.annotation.AnnotationConfigApplicationContext" level="ERROR">
 		<appender-ref ref="STDOUT"/>
 	</logger>
