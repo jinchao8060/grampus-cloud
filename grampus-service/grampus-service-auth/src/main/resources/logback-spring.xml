@@ -30,10 +30,18 @@
 		</filter>
 	</appender>
 
-	<logger name="com.vdegree" level="DEBUG" additivity="false">
-		<appender-ref ref="CONSOLE"/>
-		<appender-ref ref="STDOUT"/>
-	</logger>
+	<springProfile name="dev,test">
+		<logger name="com.vdegree" level="DEBUG" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="STDOUT"/>
+		</logger>
+	</springProfile>
+	<springProfile name="prod">
+		<logger name="com.vdegree" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="STDOUT"/>
+		</logger>
+	</springProfile>
 	<logger name="org.springframework" level="WARN">
 		<appender-ref ref="STDOUT"/>
 	</logger>
