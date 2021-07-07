@@ -1,6 +1,5 @@
 package com.vdegree.grampus.gateway.gray;
 
-import com.vdegree.grampus.common.core.utils.JSONUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import com.vdegree.grampus.common.gray.constant.GrayLoadBalancerConstant;
 import com.vdegree.grampus.gateway.gray.rule.IGrayRuleMatcher;
@@ -32,14 +31,14 @@ public class GrayVersionRewriteConsumer implements Consumer<HttpHeaders> {
 
 	@Override
 	public void accept(HttpHeaders httpHeaders) {
-		GrayRequestInfo requestInfo = buildRequestInfo(httpHeaders);
-		String internalVersion = calculateInternalVersion(requestInfo);
-		httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_VERSION, internalVersion);
+		if (grayRoutesProperties.getEnabled()) {
+			GrayRequestInfo requestInfo = buildRequestInfo(httpHeaders);
+			String internalVersion = calculateInternalVersion(requestInfo);
+			httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_VERSION, internalVersion);
+		}
 	}
 
 	private String calculateInternalVersion(GrayRequestInfo requestInfo) {
-		log.debug("grayRequestInfo:{}", requestInfo);
-		log.debug("grayRouteProperties:{}", JSONUtil.writeValueAsString(grayRoutesProperties.getRoutes()));
 		Map<String, List<GrayRoutesProperties.RuleConditionDefinition>> routes = grayRoutesProperties.getRoutes();
 		// 匹配请求所属平台
 		if (StringUtil.isBlank(requestInfo.getPlatform())) {
@@ -49,7 +48,6 @@ public class GrayVersionRewriteConsumer implements Consumer<HttpHeaders> {
 		for (GrayRoutesProperties.RuleConditionDefinition ruleCondition : ruleConditions) {
 			for (IGrayRuleMatcher ruleMatcher : ruleMatchers) {
 				if (ruleMatcher.isMatch(ruleCondition, requestInfo)) {
-					log.debug("match ruleCondition:{}", ruleCondition);
 					return ruleCondition.getVersion();
 				}
 			}

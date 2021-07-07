@@ -22,6 +22,8 @@ import java.util.Map;
 public class GrayRoutesProperties implements Serializable {
 	private static final long serialVersionUID = -5194157637384095678L;
 
+	private Boolean enabled = false;
+
 	private Map<String, List<RuleConditionDefinition>> routes;
 
 	@Data
