@@ -3,7 +3,6 @@ package com.vdegree.grampus.gateway.filter;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import com.vdegree.grampus.common.gray.constant.GrayLoadBalancerConstant;
 import com.vdegree.grampus.gateway.gray.GrayVersionRewriteConsumer;
-import com.vdegree.grampus.gateway.support.RequestPlatformEnum;
 import com.vdegree.grampus.gateway.utils.JwtTokenUtil;
 import com.vdegree.grampus.gateway.utils.WebFluxUtil;
 import lombok.AllArgsConstructor;
@@ -11,11 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.UUID;
 
 /**
  * 全局拦截器
@@ -27,6 +27,7 @@ import reactor.core.publisher.Mono;
 @Component
 @AllArgsConstructor
 public class RequestGlobalFilter implements GlobalFilter, Ordered {
+	private static final String HEADER_INTERNAL_REQUEST_ID = "Internal-Request-Id";
 	private final GrayVersionRewriteConsumer grayVersionRewriteConsumer;
 
 	@Override
@@ -38,6 +39,12 @@ public class RequestGlobalFilter implements GlobalFilter, Ordered {
 					httpHeaders.remove(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_IP);
 					httpHeaders.remove(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_SUBJECT);
 					httpHeaders.remove(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_PLATFORM);
+					httpHeaders.remove(HEADER_INTERNAL_REQUEST_ID);
+				})
+				// header添加RequestId
+				.headers(httpHeaders -> {
+					httpHeaders.add(HEADER_INTERNAL_REQUEST_ID,
+							UUID.randomUUID().toString().replaceAll("-", ""));
 				})
 				// header添加请求IP,Subject,Platform
 				.headers(httpHeaders -> {
