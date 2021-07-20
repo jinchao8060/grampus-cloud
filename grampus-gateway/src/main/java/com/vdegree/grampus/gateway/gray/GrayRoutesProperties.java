@@ -24,6 +24,8 @@ public class GrayRoutesProperties implements Serializable {
 
 	private Boolean enabled = false;
 
+	private String defaultVersion;
+
 	private Map<String, List<RuleConditionDefinition>> routes;
 
 	@Data

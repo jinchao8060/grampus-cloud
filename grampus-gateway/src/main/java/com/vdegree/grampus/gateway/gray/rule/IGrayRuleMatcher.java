@@ -4,7 +4,7 @@ import com.vdegree.grampus.gateway.gray.GrayRequestInfo;
 import com.vdegree.grampus.gateway.gray.GrayRoutesProperties;
 
 /**
- * IGrayRuleMatch 顺序：GraySubjectRuleMatch -> GrayIpRuleMatch -> GrayLonLatRuleMatch
+ * IGrayRuleMatch 顺序：GrayVersionRuleMatcher -> GraySubjectRuleMatch -> GrayIpRuleMatch -> GrayLonLatRuleMatch
  *
  * @author Beck
  * @since 2021-07-01

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @author Beck
  * @since 2021-07-01
  */
-@Order(1)
+@Order(2)
 @Component
 public class GraySubjectRuleMatcher implements IGrayRuleMatcher {
 

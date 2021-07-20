@@ -52,7 +52,33 @@ public class GrayVersionRewriteConsumer implements Consumer<HttpHeaders> {
 				}
 			}
 		}
-		return requestInfo.getVersion();
+		return calculateDefaultVersion(requestInfo.getPlatform());
+	}
+
+	private String calculateDefaultVersion(String platform) {
+		String defaultVersion = grayRoutesProperties.getDefaultVersion();
+		if (StringUtil.isBlank(defaultVersion)) {
+			return null;
+		}
+		String[] defaultPlatformVersionArr = defaultVersion.split(",");
+		if (defaultPlatformVersionArr.length == 0) {
+			return null;
+		}
+		for (String defaultPlatformVersion : defaultPlatformVersionArr) {
+			if (StringUtil.isBlank(defaultPlatformVersion)) {
+				continue;
+			}
+			String[] platformVersionArr = defaultPlatformVersion.split("#");
+			if (platformVersionArr.length < 2) {
+				continue;
+			}
+			String plat = platformVersionArr[0];
+			String version = platformVersionArr[1];
+			if (StringUtil.isNotBlank(plat) && plat.equals(platform)) {
+				return version;
+			}
+		}
+		return defaultVersion;
 	}
 
 	private GrayRequestInfo buildRequestInfo(HttpHeaders httpHeaders) {

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author Beck
  * @since 2021-07-01
  */
-@Order(3)
+@Order(4)
 @Component
 public class GrayLonLatRuleMatcher implements IGrayRuleMatcher {
 
