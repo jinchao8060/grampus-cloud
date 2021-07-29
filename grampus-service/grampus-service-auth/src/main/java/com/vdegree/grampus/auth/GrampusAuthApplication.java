@@ -4,6 +4,7 @@ import com.vdegree.grampus.common.gray.annotation.EnableGrayLoadBalancer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+//import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 
 import java.util.TimeZone;
 
@@ -13,6 +14,7 @@ import java.util.TimeZone;
  * @author Beck
  * @since 2021-06-15
  */
+//@EnableAuthorizationServer
 @EnableGrayLoadBalancer
 @EnableFeignClients(basePackages = {"com.vdegree.grampus"})
 @SpringBootApplication

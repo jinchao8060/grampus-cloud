@@ -26,6 +26,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-swagger-micro</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-client-admin</artifactId>
 		</dependency>
 		<dependency>

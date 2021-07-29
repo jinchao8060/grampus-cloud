@@ -11,25 +11,19 @@
 
 	<artifactId>grampus-swagger</artifactId>
 
+	<properties>
+		<knife4j-aggregation.version>2.0.9</knife4j-aggregation.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-cloud</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-aggregation-spring-boot-starter</artifactId>
-			<version>2.0.9</version>
+			<version>${knife4j-aggregation.version}</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>
