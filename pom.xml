@@ -13,6 +13,7 @@
 		<module>grampus-gateway</module>
 		<module>grampus-service</module>
 		<module>grampus-service-client</module>
+		<module>grampus-platform</module>
 	</modules>
 
 	<properties>

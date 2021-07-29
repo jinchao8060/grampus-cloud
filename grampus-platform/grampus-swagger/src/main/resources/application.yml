@@ -1,0 +1,22 @@
+server:
+  port: 19081
+knife4j:
+  enableAggregation: true
+  nacos:
+    enable: true
+    serviceUrl: http://${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}/nacos/
+    routes:
+      - name: 认证服务
+        serviceName: grampus-service-auth
+        namespaceId: grampus-cloud
+        groupName: GRAMPUS_CLOUD_GROUP
+        location: /v2/api-docs?group=default
+        swaggerVersion: 2.0
+        servicePath: /auth
+      - name: 系统服务
+        serviceName: grampus-service-admin
+        namespaceId: grampus-cloud
+        groupName: GRAMPUS_CLOUD_GROUP
+        location: /v2/api-docs?group=default
+        swaggerVersion: 2.0
+        servicePath: /admin
