@@ -98,13 +98,13 @@ knife4j:
     routes:
       - name: 认证服务
         serviceName: grampus-service-auth
-        namespaceId: grampus-cloud
-        groupName: GRAMPUS_CLOUD_GROUP
+        namespaceId: ${spring.cloud.nacos.discovery.namespace}
+        groupName: ${spring.cloud.nacos.discovery.group}
         location: /v2/api-docs?group=default
         swaggerVersion: 2.0
       - name: 系统服务
         serviceName: grampus-service-admin
-        namespaceId: grampus-cloud
-        groupName: GRAMPUS_CLOUD_GROUP
+        namespaceId: ${spring.cloud.nacos.discovery.namespace}
+        groupName: ${spring.cloud.nacos.discovery.group}
         location: /v2/api-docs?group=default
         swaggerVersion: 2.0
