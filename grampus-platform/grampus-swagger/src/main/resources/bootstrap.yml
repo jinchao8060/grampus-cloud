@@ -86,36 +86,6 @@ feign:
         connectTimeout: 15000
         readTimeout: 15000
 
-mybatis:
-  configuration:
-    # 下划线转驼峰
-    map-underscore-to-camel-case: true
-  # 搜索指定包别名
-  typeAliasesPackage: com.vdegree.grampus.*.entity
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:/mapper/**/*.xml
-
-# mybatis增强配置
-mapper:
-  not-empty: false
-  style: camelhump
-  identity: MYSQL
-  wrap-keyword: "`{0}`"
-  safe-delete: true
-  safe-update: true
-  idgenerator:
-    snowflake:
-      dataCenterId: 8
-      workerId: 4
-
-# PageHelper分页插件
-pagehelper:
-  auto-dialect: true
-  helper-dialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
-
 knife4j:
   enableAggregation: true
   basicAuth:
@@ -132,11 +102,9 @@ knife4j:
         groupName: GRAMPUS_CLOUD_GROUP
         location: /v2/api-docs?group=default
         swaggerVersion: 2.0
-        servicePath: /auth
       - name: 系统服务
         serviceName: grampus-service-admin
         namespaceId: grampus-cloud
         groupName: GRAMPUS_CLOUD_GROUP
         location: /v2/api-docs?group=default
         swaggerVersion: 2.0
-        servicePath: /admin
