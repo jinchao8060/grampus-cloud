@@ -1,10 +1,12 @@
 package com.vdegree.grampus.admin.modules.system.entity;
 
 import com.vdegree.grampus.common.mybatis.entity.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * (TestTx) 表实体类
@@ -25,4 +27,8 @@ public class TestTx extends BaseEntity {
 	 * 值
 	 */
 	private String value;
+	/**
+	 * 时间
+	 */
+	private Date time;
 }

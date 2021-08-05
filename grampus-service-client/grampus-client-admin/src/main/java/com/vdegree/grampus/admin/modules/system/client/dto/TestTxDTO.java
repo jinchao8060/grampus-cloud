@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (TestTx) 表数据传输对象
@@ -31,4 +32,9 @@ public class TestTxDTO implements Serializable {
 	 */
 	@ApiModelProperty("值")
 	private String value;
+	/**
+	 * 时间
+	 */
+	@ApiModelProperty("时间")
+	private Date time;
 }
