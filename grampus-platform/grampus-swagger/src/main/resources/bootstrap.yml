@@ -90,8 +90,8 @@ knife4j:
   enableAggregation: true
   basicAuth:
     enable: true
-    username: root
-    password: root
+    username: swagger
+    password: swagger
   nacos:
     enable: true
     serviceUrl: http://${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}/nacos/
