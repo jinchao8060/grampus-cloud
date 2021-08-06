@@ -2,9 +2,9 @@ package com.vdegree.grampus.admin.modules.system.service.impl;
 
 import com.vdegree.grampus.admin.modules.system.dto.SysUserDTO;
 import com.vdegree.grampus.admin.modules.system.enums.SuperAdminEnum;
-import com.vdegree.grampus.admin.modules.security.redis.SystemUserDetailsRedis;
-import com.vdegree.grampus.admin.modules.security.utils.SecurityUtils;
 import com.vdegree.grampus.admin.modules.system.service.SysUserRoleService;
+import com.vdegree.grampus.common.auth.modules.system.redis.SystemUserDetailsRedis;
+import com.vdegree.grampus.common.auth.modules.system.utils.SystemSecurityUtils;
 import com.vdegree.grampus.common.core.utils.BeanUtil;
 import com.vdegree.grampus.common.core.utils.CollectionUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service("sysUserService")
 public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysUser, SysUserDTO> implements SysUserService {
-
 	private final PasswordEncoder passwordEncoder;
 	private final SysUserRoleService sysUserRoleService;
 	private final SystemUserDetailsRedis systemUserDetailsRedis;
@@ -45,7 +44,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		SysUser sysUser = selectById(userId);
 		// 超管才能修改超管
 		if (SuperAdminEnum.TRUE.getValue().equals(sysUser.getSuperAdmin())
-				&& !SuperAdminEnum.TRUE.getValue().equals(SecurityUtils.getUserDetails().getSuperAdmin())) {
+				&& !SuperAdminEnum.TRUE.getValue().equals(SystemSecurityUtils.getUserDetails().getSuperAdmin())) {
 			return;
 		}
 		SysUser entity = new SysUser();
@@ -75,7 +74,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		SysUser sysUser = selectById(entity.getId());
 		// 超管才能修改超管
 		if (SuperAdminEnum.TRUE.getValue().equals(sysUser.getSuperAdmin())
-				&& !SuperAdminEnum.TRUE.getValue().equals(SecurityUtils.getUserDetails().getSuperAdmin())) {
+				&& !SuperAdminEnum.TRUE.getValue().equals(SystemSecurityUtils.getUserDetails().getSuperAdmin())) {
 			return;
 		}
 		String userNo = sysUser.getUserNo();

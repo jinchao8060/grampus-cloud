@@ -27,6 +27,6 @@ public class RemoteSystemUserController {
 	@GetMapping("/getSysUserByUserNo")
 	public Result<SystemUserDTO> getSysUserByUserNo(@RequestParam("userNo") String userNo) {
 		SysUser sysUser = sysUserService.getSysUserByUserNo(userNo);
-		return Result.success(BeanUtil.copy(sysUser, SystemUserDTO.class));
+		return Result.success(BeanUtil.copyWithConvert(sysUser, SystemUserDTO.class));
 	}
 }

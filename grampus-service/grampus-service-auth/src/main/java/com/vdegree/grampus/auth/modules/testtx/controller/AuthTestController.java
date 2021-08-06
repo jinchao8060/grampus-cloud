@@ -1,5 +1,7 @@
 package com.vdegree.grampus.auth.modules.testtx.controller;
 
+import com.vdegree.grampus.admin.modules.security.client.dto.SystemUserDTO;
+import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemUserClient;
 import com.vdegree.grampus.admin.modules.system.client.dto.TestTxDTO;
 import com.vdegree.grampus.admin.modules.system.client.feign.RemoteTestTxClient;
 import com.vdegree.grampus.auth.modules.testtx.service.TestTxService;
@@ -30,12 +32,14 @@ public class AuthTestController {
 
 	private final RemoteTestTxClient remoteTestTxClient;
 	private final TestTxService testTxService;
+	private final RemoteSystemUserClient remoteSystemUserClient;
 
 	@PostMapping("/demo")
-	public Result<Object> demo() {
+	public Result<Object> demo(@RequestParam String userNo) {
 		String text = "auth test demo";
 		log.debug("text:{}", text);
-		return Result.success(text);
+		SystemUserDTO user = remoteSystemUserClient.getSysUserByUserNo(userNo).getData();
+		return Result.success(user);
 	}
 
 	@PostMapping("/save")

@@ -29,19 +29,19 @@ public class RemoteSystemRoleController {
 		return Result.success(result);
 	}
 
-	@GetMapping("/getRoleIds")
+	@GetMapping("/getPermissionsByRoleIds")
 	public Result<String> getPermissionsByRoleIds(@RequestParam("roleIds") List<Long> roleIds) {
 		String result = systemRoleService.getPermissionsByRoleIds(roleIds);
 		return Result.success(result);
 	}
 
-	@GetMapping("/getRoleIds")
+	@GetMapping("/getPermissions")
 	public Result<String> getPermissions(@RequestParam("userId") Long userId) {
 		String result = systemRoleService.getPermissions(userId);
 		return Result.success(result);
 	}
 
-	@GetMapping("/getRoleIds")
+	@GetMapping("/getAllPermissions")
 	public Result<String> getAllPermissions() {
 		String result = systemRoleService.getAllPermissions();
 		return Result.success(result);

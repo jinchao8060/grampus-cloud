@@ -19,12 +19,12 @@ public interface RemoteSystemRoleClient {
 	@GetMapping("/getRoleIds")
 	Result<List<Long>> getRoleIds(@RequestParam("userId") Long userId);
 
-	@GetMapping("/getRoleIds")
+	@GetMapping("/getPermissionsByRoleIds")
 	Result<String> getPermissionsByRoleIds(@RequestParam("roleIds") List<Long> roleIds);
 
-	@GetMapping("/getRoleIds")
+	@GetMapping("/getPermissions")
 	Result<String> getPermissions(@RequestParam("userId") Long userId);
 
-	@GetMapping("/getRoleIds")
+	@GetMapping("/getAllPermissions")
 	Result<String> getAllPermissions();
 }

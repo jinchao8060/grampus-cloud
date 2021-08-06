@@ -22,6 +22,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-excel</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-mybatis</artifactId>
 		</dependency>
 		<dependency>
@@ -30,11 +34,19 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-lock</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-log</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-excel</artifactId>
+			<artifactId>grampus-common-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-xxl-job</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>

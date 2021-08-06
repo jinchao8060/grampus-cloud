@@ -1,5 +1,6 @@
 package com.vdegree.grampus.admin;
 
+import com.vdegree.grampus.common.auth.annotation.EnableGrampusResourceServer;
 import com.vdegree.grampus.common.gray.annotation.EnableGrayLoadBalancer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import java.util.TimeZone;
  * @author Beck
  * @since 2021-06-15
  */
+@EnableGrampusResourceServer
 @EnableGrayLoadBalancer
 @EnableFeignClients(basePackages = {"com.vdegree.grampus"})
 @SpringBootApplication

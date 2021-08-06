@@ -5,9 +5,10 @@ import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemRoleC
 import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemUserClient;
 import com.vdegree.grampus.auth.modules.security.exception.UserDisabledException;
 import com.vdegree.grampus.auth.modules.security.exception.UserNotFoundException;
-import com.vdegree.grampus.auth.modules.security.redis.SystemUserDetailsRedis;
 import com.vdegree.grampus.auth.modules.system.enums.SuperAdminEnum;
 import com.vdegree.grampus.auth.modules.system.enums.SysUserEnabledEnum;
+import com.vdegree.grampus.common.auth.modules.system.redis.SystemUserDetailsRedis;
+import com.vdegree.grampus.common.auth.modules.system.users.SystemUserDetails;
 import com.vdegree.grampus.common.core.utils.BeanUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,6 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class SystemUserDetailsService implements UserDetailsService {
-
 	private final RemoteSystemUserClient remoteSystemUserClient;
 	private final RemoteSystemRoleClient remoteSystemRoleClient;
 	private final SystemUserDetailsRedis systemUserDetailsRedis;
