@@ -1,6 +1,6 @@
 package com.vdegree.grampus.admin.config;
 
-import com.vdegree.grampus.admin.modules.security.utils.SecurityUtils;
+import com.vdegree.grampus.common.auth.modules.system.utils.SystemSecurityUtils;
 import com.vdegree.grampus.common.core.utils.ReflectUtil;
 import com.vdegree.grampus.common.mybatis.annotation.FieldFill;
 import com.vdegree.grampus.common.mybatis.annotation.TableField;
@@ -45,7 +45,7 @@ public class MybatisConfig {
 
 		@Override
 		public void fill(TableFieldObject tableFieldObject) {
-			String currentUserNo = Objects.requireNonNull(SecurityUtils.getUserDetails()).getUserNo();
+			String currentUserNo = Objects.requireNonNull(SystemSecurityUtils.getUserDetails()).getUserNo();
 			LocalDateTime currentDate = LocalDateTime.now();
 
 			SqlCommandType sqlCommandType = tableFieldObject.getSqlCommandType();
