@@ -1,0 +1,49 @@
+package com.vdegree.grampus.admin.modules.security.controller;
+
+import com.vdegree.grampus.admin.modules.security.roles.SystemRoleService;
+import com.vdegree.grampus.common.core.result.Result;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * RemoteSystemRoleController
+ *
+ * @author Beck
+ * @since 2021-08-05
+ */
+@RestController
+@AllArgsConstructor
+@RequestMapping("/rmi/system/role")
+public class RemoteSystemRoleController {
+
+	private final SystemRoleService systemRoleService;
+
+	@GetMapping("/getRoleIds")
+	public Result<List<Long>> getRoleIds(@RequestParam("userId") Long userId) {
+		List<Long> result = systemRoleService.getRoleIds(userId);
+		return Result.success(result);
+	}
+
+	@GetMapping("/getRoleIds")
+	public Result<String> getPermissionsByRoleIds(@RequestParam("roleIds") List<Long> roleIds) {
+		String result = systemRoleService.getPermissionsByRoleIds(roleIds);
+		return Result.success(result);
+	}
+
+	@GetMapping("/getRoleIds")
+	public Result<String> getPermissions(@RequestParam("userId") Long userId) {
+		String result = systemRoleService.getPermissions(userId);
+		return Result.success(result);
+	}
+
+	@GetMapping("/getRoleIds")
+	public Result<String> getAllPermissions() {
+		String result = systemRoleService.getAllPermissions();
+		return Result.success(result);
+	}
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vdegree.grampus.admin.modules.security.roles.dao.SystemRoleDao">
+
+	<select id="getRoleIds" resultType="java.lang.Long">
+		SELECT sur.`role_id`
+		FROM sys_user_role sur
+		WHERE sur.`user_id` = #{userId}
+	</select>
+
+	<resultMap id="systemRolePermResultMap" type="com.vdegree.grampus.admin.modules.security.roles.dto.SystemRolePermDTO">
+		<result property="roleId" column="role_id" javaType="java.lang.Long"/>
+		<collection property="permission" ofType="java.lang.String" javaType="java.util.HashSet">
+			<result property="permission" column="permission" javaType="java.lang.String"/>
+		</collection>
+	</resultMap>
+	<select id="getPermissionsByRoleIds" resultMap="systemRolePermResultMap">
+		SELECT srm.`role_id`, sm.`permission`
+		FROM sys_role_menu srm
+		LEFT JOIN sys_menu sm
+			ON srm.`menu_id` = sm.`id`
+		WHERE srm.`role_id` IN
+		<foreach collection="roleIds" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getPermissions" resultType="java.lang.String">
+		SELECT sm.`permission`
+		FROM sys_user_role sur
+		LEFT JOIN sys_role_menu srm
+		    ON sur.`role_id` = srm.`role_id`
+		LEFT JOIN sys_menu sm
+		    ON srm.`menu_id` = sm.`id`
+		WHERE sur.`user_id` = #{userId}
+	</select>
+
+	<select id="getAllPermissions" resultType="java.lang.String">
+		SELECT sm.`permission`
+		FROM sys_menu sm
+		WHERE sm.`permission` IS NOT NULL
+		  AND sm.`permission` != ''
+	</select>
+</mapper>

@@ -18,11 +18,23 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-oauth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-mybatis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-log</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-excel</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>

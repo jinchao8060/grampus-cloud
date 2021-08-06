@@ -24,10 +24,10 @@
 			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-redis</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.vdegree</groupId>-->
-<!--			<artifactId>grampus-common-auth</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.vdegree</groupId>
+			<artifactId>grampus-common-oauth</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
 			<artifactId>grampus-common-swagger-micro</artifactId>
