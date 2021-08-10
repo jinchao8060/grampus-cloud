@@ -3,8 +3,6 @@ package com.vdegree.grampus.auth.modules.security.users;
 import com.vdegree.grampus.admin.modules.security.client.dto.SystemUserDTO;
 import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemRoleClient;
 import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemUserClient;
-import com.vdegree.grampus.auth.modules.security.exception.UserDisabledException;
-import com.vdegree.grampus.auth.modules.security.exception.UserNotFoundException;
 import com.vdegree.grampus.auth.modules.system.enums.SuperAdminEnum;
 import com.vdegree.grampus.auth.modules.system.enums.SysUserEnabledEnum;
 import com.vdegree.grampus.common.auth.modules.system.redis.SystemUserDetailsRedis;
@@ -12,6 +10,7 @@ import com.vdegree.grampus.common.auth.modules.system.users.SystemUserDetails;
 import com.vdegree.grampus.common.core.utils.BeanUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -51,12 +50,14 @@ public class SystemUserDetailsService implements UserDetailsService {
 
 		// 用户不存在
 		if (user == null) {
-			throw new UserNotFoundException();
+//			throw new UserNotFoundException();
+			throw new UsernameNotFoundException("System user not exists.");
 		}
 
 		// 用户被禁用
 		if (SysUserEnabledEnum.DISABLED.getValue().equals(user.getEnabled())) {
-			throw new UserDisabledException();
+//			throw new UserDisabledException();
+			throw new DisabledException("System user is disabled.");
 		}
 
 		// 缓存系统用户详情
