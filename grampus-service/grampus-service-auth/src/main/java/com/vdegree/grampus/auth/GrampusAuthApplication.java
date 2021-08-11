@@ -15,7 +15,7 @@ import java.util.TimeZone;
  * @since 2021-06-15
  */
 @EnableGrampusAuthorizationServer
-@EnableGrayLoadBalancer
+//@EnableGrayLoadBalancer
 @EnableFeignClients(basePackages = {"com.vdegree.grampus"})
 @SpringBootApplication
 public class GrampusAuthApplication {
