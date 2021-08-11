@@ -41,25 +41,25 @@ public class RequestGlobalFilter implements GlobalFilter, Ordered {
 					httpHeaders.remove(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_PLATFORM);
 					httpHeaders.remove(HEADER_INTERNAL_REQUEST_ID);
 				})
-				// header添加RequestId
-				.headers(httpHeaders -> {
-					httpHeaders.add(HEADER_INTERNAL_REQUEST_ID,
-							UUID.randomUUID().toString().replaceAll("-", ""));
-				})
-				// header添加请求IP,Subject,Platform
-				.headers(httpHeaders -> {
-					httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_IP,
-							WebFluxUtil.getIpAddress(exchange.getRequest()));
-					String token = httpHeaders.getFirst(GrayLoadBalancerConstant.HEADER_TOKEN);
-					if (StringUtil.isNotBlank(token)) {
-						httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_SUBJECT,
-								JwtTokenUtil.getSubject(token));
-						httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_PLATFORM,
-								JwtTokenUtil.getPlatform(token));
-					}
-				})
-				// 匹配路由规则重写header版本号
-				.headers(grayVersionRewriteConsumer)
+//				// header添加RequestId
+//				.headers(httpHeaders -> {
+//					httpHeaders.add(HEADER_INTERNAL_REQUEST_ID,
+//							UUID.randomUUID().toString().replaceAll("-", ""));
+//				})
+//				// header添加请求IP,Subject,Platform
+//				.headers(httpHeaders -> {
+//					httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_IP,
+//							WebFluxUtil.getIpAddress(exchange.getRequest()));
+//					String token = httpHeaders.getFirst(GrayLoadBalancerConstant.HEADER_TOKEN);
+//					if (StringUtil.isNotBlank(token)) {
+//						httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_SUBJECT,
+//								JwtTokenUtil.getSubject(token));
+//						httpHeaders.add(GrayLoadBalancerConstant.HEADER_INTERNAL_REQUEST_PLATFORM,
+//								JwtTokenUtil.getPlatform(token));
+//					}
+//				})
+//				// 匹配路由规则重写header版本号
+//				.headers(grayVersionRewriteConsumer)
 				.build();
 		ServerWebExchange mutatedExchange = exchange.mutate().request(mutatedRequest).build();
 		return chain.filter(mutatedExchange);
