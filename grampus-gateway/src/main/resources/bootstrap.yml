@@ -53,9 +53,13 @@ spring:
           uri: lb://grampus-service-auth
           predicates:
             - Path=/auth/**
+          filters:
+            - StripPrefix=0
           order: 100
         - id: grampus-service-admin
           uri: lb://grampus-service-admin
           predicates:
-            - Path=/admin/**
+            - Path=/system/**
+          filters:
+            - StripPrefix=0
           order: 99
