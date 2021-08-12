@@ -3,7 +3,7 @@ package com.vdegree.grampus.admin.modules.system.service.impl;
 import com.vdegree.grampus.admin.modules.system.dto.SysUserDTO;
 import com.vdegree.grampus.admin.modules.system.enums.SuperAdminEnum;
 import com.vdegree.grampus.admin.modules.system.service.SysUserRoleService;
-import com.vdegree.grampus.common.auth.modules.system.redis.SystemUserDetailsRedis;
+import com.vdegree.grampus.auth.modules.system.client.feign.RemoteSystemUserDetailsClient;
 import com.vdegree.grampus.common.auth.modules.system.utils.SystemSecurityUtils;
 import com.vdegree.grampus.common.core.utils.BeanUtil;
 import com.vdegree.grampus.common.core.utils.CollectionUtil;
@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysUser, SysUserDTO> implements SysUserService {
 	private final PasswordEncoder passwordEncoder;
 	private final SysUserRoleService sysUserRoleService;
-	private final SystemUserDetailsRedis systemUserDetailsRedis;
+	private final RemoteSystemUserDetailsClient remoteSystemUserDetailsClient;
 
 	@Override
 	public SysUser getSysUserByUserNo(String userNo) {
@@ -86,6 +86,6 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		if (CollectionUtil.isNotEmpty(dto.getRoleIdList())) {
 			sysUserRoleService.saveOrUpdate(entity.getId(), dto.getRoleIdList());
 		}
-		systemUserDetailsRedis.removeSystemUserDetails(userNo);
+		remoteSystemUserDetailsClient.removeSystemUserDetails(userNo);
 	}
 }

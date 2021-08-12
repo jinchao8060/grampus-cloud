@@ -26,3 +26,7 @@ spring:
         min-idle: 5
         max-active: 1000
         max-wait: 20000ms
+
+logging:
+  level:
+    org.springframework.security: DEBUG
