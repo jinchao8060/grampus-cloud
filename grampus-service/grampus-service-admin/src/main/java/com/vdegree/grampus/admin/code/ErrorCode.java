@@ -79,7 +79,11 @@ public interface ErrorCode {
 		/**
 		 * 存在子菜单异常
 		 */
-		SUB_MENU_EXIST("121201B001", "SUB_MENU_EXIST");
+		SUB_MENU_EXIST("121201B001", "SUB_MENU_EXIST"),
+		/**
+		 * 用户密码错误异常
+		 */
+		USER_PASSWORD_ERROR("121201B002", "USER_PASSWORD_ERROR");
 
 		@Getter String code;
 		@Getter String msg;
