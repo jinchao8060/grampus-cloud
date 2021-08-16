@@ -55,7 +55,7 @@ public class SystemUserDetailsService implements UserDetailsService {
 		}
 
 		// 用户被禁用
-		if (SysUserEnabledEnum.DISABLED.getValue().equals(user.getEnabled())) {
+		if (SysUserEnabledEnum.DISABLED.getValue().equals(user.getStatus())) {
 //			throw new UserDisabledException();
 			throw new DisabledException("System user is disabled.");
 		}

@@ -10,7 +10,7 @@ import lombok.Getter;
  * @since 2020-12-15
  */
 @AllArgsConstructor
-public enum SysUserEnabledEnum {
+public enum SysUserStatusEnum {
 
 	/**
 	 * 禁用
