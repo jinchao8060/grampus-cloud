@@ -59,7 +59,7 @@ public class SysUserDTO implements Serializable {
 	 * 是否启用(0停用 1启用)
 	 */
 	@ApiModelProperty("是否启用(0停用 1启用)")
-	private Integer enabled;
+	private Integer status;
 	/**
 	 * 用户所属角色列表
 	 */

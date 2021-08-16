@@ -51,7 +51,7 @@ public class SysUserReqDTO implements Serializable {
 	 * 是否启用(0停用 1启用)
 	 */
 	@ApiModelProperty(value = "是否启用(0停用 1启用)", required = true)
-	private Integer enabled;
+	private Integer status;
 	/**
 	 * 用户所属角色列表
 	 */
