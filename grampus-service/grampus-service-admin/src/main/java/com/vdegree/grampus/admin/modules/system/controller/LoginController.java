@@ -47,6 +47,8 @@ public class LoginController {
 			return result;
 		}
 
+		result.put("token", "Bearer " + result.get("access_token"));
+
 		return Result.success(result);
 	}
 
