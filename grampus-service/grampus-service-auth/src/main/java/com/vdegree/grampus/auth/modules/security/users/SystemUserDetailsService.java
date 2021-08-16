@@ -5,7 +5,7 @@ import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemRoleC
 import com.vdegree.grampus.admin.modules.security.client.feign.RemoteSystemUserClient;
 import com.vdegree.grampus.auth.modules.security.redis.SystemUserDetailsRedis;
 import com.vdegree.grampus.auth.modules.system.enums.SuperAdminEnum;
-import com.vdegree.grampus.auth.modules.system.enums.SysUserEnabledEnum;
+import com.vdegree.grampus.auth.modules.system.enums.SysUserStatusEnum;
 import com.vdegree.grampus.common.auth.modules.system.users.SystemUserDetails;
 import com.vdegree.grampus.common.core.utils.BeanUtil;
 import com.vdegree.grampus.common.core.utils.StringUtil;
@@ -55,7 +55,7 @@ public class SystemUserDetailsService implements UserDetailsService {
 		}
 
 		// 用户被禁用
-		if (SysUserEnabledEnum.DISABLED.getValue().equals(user.getStatus())) {
+		if (SysUserStatusEnum.DISABLED.getValue().equals(user.getStatus())) {
 //			throw new UserDisabledException();
 			throw new DisabledException("System user is disabled.");
 		}
