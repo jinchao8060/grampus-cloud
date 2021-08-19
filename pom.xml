@@ -61,7 +61,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.vdegree</groupId>
-				<artifactId>grampus-common-dependencies</artifactId>
+				<artifactId>grampus-framework-dependencies</artifactId>
 				<version>${grampus.version}</version>
 				<type>pom</type>
 				<scope>import</scope>

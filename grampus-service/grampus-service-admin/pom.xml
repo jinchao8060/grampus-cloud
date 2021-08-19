@@ -14,43 +14,43 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-cloud</artifactId>
+			<artifactId>grampus-framework-cloud</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-oauth</artifactId>
+			<artifactId>grampus-framework-oauth</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-excel</artifactId>
+			<artifactId>grampus-framework-excel</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-mybatis</artifactId>
+			<artifactId>grampus-framework-mybatis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-redis</artifactId>
+			<artifactId>grampus-framework-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-lock</artifactId>
+			<artifactId>grampus-framework-lock</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-log</artifactId>
+			<artifactId>grampus-framework-log</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-security</artifactId>
+			<artifactId>grampus-framework-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-xxl-job</artifactId>
+			<artifactId>grampus-framework-xxl-job</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-swagger-micro</artifactId>
+			<artifactId>grampus-framework-swagger-micro</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>

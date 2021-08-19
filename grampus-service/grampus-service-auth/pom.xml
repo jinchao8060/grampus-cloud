@@ -14,23 +14,23 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-cloud</artifactId>
+			<artifactId>grampus-framework-cloud</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-mybatis</artifactId>
+			<artifactId>grampus-framework-mybatis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-redis</artifactId>
+			<artifactId>grampus-framework-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-oauth</artifactId>
+			<artifactId>grampus-framework-oauth</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-swagger-micro</artifactId>
+			<artifactId>grampus-framework-swagger-micro</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vdegree</groupId>

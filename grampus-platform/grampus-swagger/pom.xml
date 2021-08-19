@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-common-cloud</artifactId>
+			<artifactId>grampus-framework-cloud</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
