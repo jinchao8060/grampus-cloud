@@ -4,7 +4,7 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>grampus-service</artifactId>
-		<groupId>com.vdegree</groupId>
+		<groupId>com.oceancloud</groupId>
 		<version>1.0.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -13,31 +13,31 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.vdegree</groupId>
+			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-framework-cloud</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vdegree</groupId>
+			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-framework-mybatis</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vdegree</groupId>
+			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-framework-redis</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vdegree</groupId>
-			<artifactId>grampus-framework-oauth</artifactId>
+			<groupId>com.oceancloud</groupId>
+			<artifactId>grampus-framework-oauth2</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vdegree</groupId>
+			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-framework-swagger-micro</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vdegree</groupId>
+			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-client-admin</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.vdegree</groupId>
+			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-client-auth</artifactId>
 		</dependency>
 	</dependencies>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vdegree.grampus.admin.modules.security.roles.dao.SystemRoleDao">
+<mapper namespace="com.oceancloud.grampus.admin.modules.security.roles.dao.SystemRoleDao">
 
 	<select id="getRoleIds" resultType="java.lang.Long">
 		SELECT sur.`role_id`
@@ -8,7 +8,7 @@
 		WHERE sur.`user_id` = #{userId}
 	</select>
 
-	<resultMap id="systemRolePermResultMap" type="com.vdegree.grampus.admin.modules.security.roles.dto.SystemRolePermDTO">
+	<resultMap id="systemRolePermResultMap" type="com.oceancloud.grampus.admin.modules.security.roles.dto.SystemRolePermDTO">
 		<result property="roleId" column="role_id" javaType="java.lang.Long"/>
 		<collection property="permission" ofType="java.lang.String" javaType="java.util.HashSet">
 			<result property="permission" column="permission" javaType="java.lang.String"/>

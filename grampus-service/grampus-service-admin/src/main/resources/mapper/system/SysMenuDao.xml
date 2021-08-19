@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vdegree.grampus.admin.modules.system.dao.SysMenuDao">
+<mapper namespace="com.oceancloud.grampus.admin.modules.system.dao.SysMenuDao">
 
-    <select id="queryUserMenuList" resultType="com.vdegree.grampus.admin.modules.system.entity.SysMenu">
+    <select id="queryUserMenuList" resultType="com.oceancloud.grampus.admin.modules.system.entity.SysMenu">
 		SELECT
 		sm.`id`,
 		sm.`parent_id`,
