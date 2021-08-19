@@ -18,6 +18,7 @@
 
 	<properties>
 		<grampus.version>1.0.0</grampus.version>
+		<grampus-framework.version>1.0.0</grampus-framework.version>
 		<spring-boot.version>2.5.2</spring-boot.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 		<spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
@@ -62,7 +63,7 @@
 			<dependency>
 				<groupId>com.vdegree</groupId>
 				<artifactId>grampus-framework-dependencies</artifactId>
-				<version>${grampus.version}</version>
+				<version>${grampus-framework.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
