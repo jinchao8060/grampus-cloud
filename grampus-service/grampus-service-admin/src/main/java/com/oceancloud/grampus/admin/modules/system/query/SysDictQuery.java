@@ -19,11 +19,11 @@ public class SysDictQuery implements Serializable {
 	/**
 	 * 字典类型
 	 */
-	@ApiModelProperty(value = "字典类型", required = true)
+	@ApiModelProperty(value = "字典类型")
 	private String dictType;
 	/**
 	 * 字典名称
 	 */
-	@ApiModelProperty(value = "字典名称", required = true)
+	@ApiModelProperty(value = "字典名称")
 	private String dictName;
 }
