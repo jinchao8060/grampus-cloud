@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * 字典数据表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:48:32
+ * @since 2020-12-09
  */
 @AllArgsConstructor
 @Service("sysDictItemService")

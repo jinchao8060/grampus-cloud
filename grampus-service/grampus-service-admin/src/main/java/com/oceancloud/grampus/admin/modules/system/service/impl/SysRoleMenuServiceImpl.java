@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * 角色菜单表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:50:44
+ * @since 2020-12-09
  */
 @Service("sysRoleMenuService")
 public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenu> implements SysRoleMenuService {

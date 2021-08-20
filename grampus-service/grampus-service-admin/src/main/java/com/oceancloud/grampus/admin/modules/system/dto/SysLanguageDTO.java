@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 系统语言表DTO
  *
  * @author Beck
- * @since 2021-06-08 10:42:16
+ * @since 2021-06-08
  */
 @Data
 @ApiModel("系统语言表")

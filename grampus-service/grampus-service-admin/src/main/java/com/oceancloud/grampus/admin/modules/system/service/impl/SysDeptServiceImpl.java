@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * 部门表 服务实现类
  *
  * @author Beck
- * @since 2020-12-03 20:06:59
+ * @since 2020-12-03
  */
 @Slf4j
 @Service("sysDeptService")

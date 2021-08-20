@@ -1,15 +1,14 @@
 package com.oceancloud.grampus.admin.modules.system.controller;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysRoleDTO;
+import com.oceancloud.grampus.admin.modules.system.query.SysRoleQuery;
 import com.oceancloud.grampus.admin.modules.system.service.SysRoleMenuService;
 import com.oceancloud.grampus.admin.modules.system.service.SysRoleService;
-import com.oceancloud.grampus.framework.core.constant.Constant;
 import com.oceancloud.grampus.framework.core.result.Result;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
 import com.oceancloud.grampus.framework.mybatis.page.PageData;
+import com.oceancloud.grampus.framework.mybatis.page.PageQuery;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,12 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统角色管理
@@ -44,17 +40,9 @@ public class SysRoleController {
 
 	@ApiOperation("角色分页查询")
 	@GetMapping("page")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = Constant.PAGE_NUM, value = "当前页码，从1开始", paramType = "query", required = true, dataType = "int"),
-			@ApiImplicitParam(name = Constant.PAGE_SIZE, value = "每页显示记录数", paramType = "query", required = true, dataType = "int"),
-			@ApiImplicitParam(name = Constant.ORDER, value = "排序条件(field1#asc,field2#desc)", paramType = "query", dataType = "String"),
-			@ApiImplicitParam(name = Constant.WITH_COUNT, value = "查询数据总量(true、false)", paramType = "query", dataType = "Boolean"),
-			@ApiImplicitParam(name = "roleCode", value = "角色编号", paramType = "query", dataType = "String"),
-			@ApiImplicitParam(name = "roleName", value = "角色名", paramType = "query", dataType = "String")
-	})
 	@PreAuthorize("hasAuthority('sys:role:list')")
-	public Result<PageData<SysRoleDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
-		PageData<SysRoleDTO> result = sysRoleService.queryPage(params);
+	public Result<PageData<SysRoleDTO>> page(PageQuery pageQuery, SysRoleQuery params) {
+		PageData<SysRoleDTO> result = sysRoleService.queryPage(pageQuery, params);
 		return Result.success(result);
 	}
 

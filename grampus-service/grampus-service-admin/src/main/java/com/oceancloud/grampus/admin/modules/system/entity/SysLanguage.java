@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * 系统语言表 表实体类
  *
  * @author Beck
- * @since 2021-06-08 10:42:15
+ * @since 2021-06-08
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

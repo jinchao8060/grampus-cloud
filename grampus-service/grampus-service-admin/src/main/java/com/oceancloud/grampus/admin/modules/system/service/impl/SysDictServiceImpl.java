@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * 字典表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:47:47
+ * @since 2020-12-09
  */
 @AllArgsConstructor
 @Service("sysDictService")

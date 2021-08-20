@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * 系统语言表 表服务实现类
  *
  * @author Beck
- * @since 2021-06-08 10:42:16
+ * @since 2021-06-08
  */
 @Service("sysLanguageService")
 public class SysLanguageServiceImpl extends EnhancedBaseServiceImpl<SysLanguageDao, SysLanguage, SysLanguageDTO> implements SysLanguageService {

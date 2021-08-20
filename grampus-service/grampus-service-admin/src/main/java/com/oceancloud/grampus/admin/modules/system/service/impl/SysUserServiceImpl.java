@@ -1,10 +1,10 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserDTO;
-import com.oceancloud.grampus.admin.modules.system.enums.SuperAdminEnum;
+import com.oceancloud.grampus.admin.modules.security.enums.SuperAdminEnum;
+import com.oceancloud.grampus.admin.modules.security.redis.SystemUserDetailsRedis;
+import com.oceancloud.grampus.admin.modules.security.utils.SecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.service.SysUserRoleService;
-import com.oceancloud.grampus.auth.modules.system.client.feign.RemoteSystemUserDetailsClient;
-import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.framework.core.utils.BeanUtil;
 import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
 import com.oceancloud.grampus.framework.core.utils.StringUtil;
@@ -22,14 +22,15 @@ import org.springframework.transaction.annotation.Transactional;
  * 用户表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:50:59
+ * @since 2020-12-09
  */
 @AllArgsConstructor
 @Service("sysUserService")
 public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysUser, SysUserDTO> implements SysUserService {
+
 	private final PasswordEncoder passwordEncoder;
 	private final SysUserRoleService sysUserRoleService;
-	private final RemoteSystemUserDetailsClient remoteSystemUserDetailsClient;
+	private final SystemUserDetailsRedis systemUserDetailsRedis;
 
 	@Override
 	public SysUser getSysUserByUserNo(String userNo) {
@@ -44,7 +45,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		SysUser sysUser = selectById(userId);
 		// 超管才能修改超管
 		if (SuperAdminEnum.TRUE.getValue().equals(sysUser.getSuperAdmin())
-				&& !SuperAdminEnum.TRUE.getValue().equals(SystemSecurityUtils.getUserDetails().getSuperAdmin())) {
+				&& !SuperAdminEnum.TRUE.getValue().equals(SecurityUtils.getUserDetails().getSuperAdmin())) {
 			return;
 		}
 		SysUser entity = new SysUser();
@@ -74,7 +75,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		SysUser sysUser = selectById(entity.getId());
 		// 超管才能修改超管
 		if (SuperAdminEnum.TRUE.getValue().equals(sysUser.getSuperAdmin())
-				&& !SuperAdminEnum.TRUE.getValue().equals(SystemSecurityUtils.getUserDetails().getSuperAdmin())) {
+				&& !SuperAdminEnum.TRUE.getValue().equals(SecurityUtils.getUserDetails().getSuperAdmin())) {
 			return;
 		}
 		String userNo = sysUser.getUserNo();
@@ -86,6 +87,6 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		if (CollectionUtil.isNotEmpty(dto.getRoleIdList())) {
 			sysUserRoleService.saveOrUpdate(entity.getId(), dto.getRoleIdList());
 		}
-		remoteSystemUserDetailsClient.removeSystemUserDetails(userNo);
+		systemUserDetailsRedis.removeSystemUserDetails(userNo);
 	}
 }

@@ -8,7 +8,7 @@ import com.oceancloud.grampus.framework.mybatis.service.EnhancedBaseService;
  * 字典数据表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:48:32
+ * @since 2020-12-09
  */
 public interface SysDictItemService extends EnhancedBaseService<SysDictItem, SysDictItemDTO> {
 

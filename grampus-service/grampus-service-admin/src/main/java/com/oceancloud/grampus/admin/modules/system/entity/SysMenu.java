@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 菜单表 实体类
  *
  * @author Beck
- * @since 2020-12-09 19:49:29
+ * @since 2020-12-09
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

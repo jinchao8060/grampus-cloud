@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 操作日志表(LogOperation) 表实体类
  *
  * @author Beck
- * @since 2021-05-31 16:43:11
+ * @since 2021-05-31
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -9,7 +9,7 @@ import java.util.List;
  * 用户角色关联表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:51:17
+ * @since 2020-12-09
  */
 public interface SysUserRoleService extends BaseService<SysUserRole> {
 

@@ -8,7 +8,7 @@ import com.oceancloud.grampus.framework.mybatis.mapper.BaseMapper;
  * 用户表 数据库访问层
  *
  * @author Beck
- * @since 2020-12-09 19:50:58
+ * @since 2020-12-09
  */
 @MyBatisMapper
 public interface SysUserDao extends BaseMapper<SysUser> {

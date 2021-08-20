@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * 公共参数表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:49:55
+ * @since 2020-12-09
  */
 @Service("sysParamService")
 public class SysParamServiceImpl extends EnhancedBaseServiceImpl<SysParamDao, SysParam, SysParamDTO> implements SysParamService {

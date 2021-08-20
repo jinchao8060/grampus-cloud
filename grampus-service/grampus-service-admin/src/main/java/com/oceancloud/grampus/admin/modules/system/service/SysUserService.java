@@ -8,7 +8,7 @@ import com.oceancloud.grampus.framework.mybatis.service.EnhancedBaseService;
  * 用户表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:50:58
+ * @since 2020-12-09
  */
 public interface SysUserService extends EnhancedBaseService<SysUser, SysUserDTO> {
 

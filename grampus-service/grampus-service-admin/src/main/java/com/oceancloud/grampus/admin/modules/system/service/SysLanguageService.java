@@ -11,7 +11,7 @@ import java.util.Map;
  * 系统语言表 表服务接口
  *
  * @author Beck
- * @since 2021-06-08 10:42:16
+ * @since 2021-06-08
  */
 public interface SysLanguageService extends EnhancedBaseService<SysLanguage, SysLanguageDTO> {
 

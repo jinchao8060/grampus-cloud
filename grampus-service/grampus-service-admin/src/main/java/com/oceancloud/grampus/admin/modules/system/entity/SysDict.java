@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * 字典表 实体类
  *
  * @author Beck
- * @since 2020-12-09 19:47:45
+ * @since 2020-12-09
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

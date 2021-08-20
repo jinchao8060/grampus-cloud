@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 用户登陆日志表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:49:00
+ * @since 2020-12-09
  */
 @Service("sysLogLoginService")
 public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysLogLogin> implements SysLogLoginService {
