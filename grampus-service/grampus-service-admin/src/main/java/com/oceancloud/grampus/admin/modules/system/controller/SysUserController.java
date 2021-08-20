@@ -4,8 +4,8 @@ import com.oceancloud.grampus.admin.code.ErrorCode;
 import com.oceancloud.grampus.admin.modules.system.dto.PasswordDTO;
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserDTO;
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserReqDTO;
-import com.oceancloud.grampus.admin.modules.security.users.SystemUserDetails;
-import com.oceancloud.grampus.admin.modules.security.utils.SecurityUtils;
+import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
+import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.query.SysUserQuery;
 import com.oceancloud.grampus.admin.modules.system.service.SysUserRoleService;
 import com.oceancloud.grampus.admin.modules.system.service.SysUserService;
@@ -67,7 +67,7 @@ public class SysUserController {
 	@ApiOperation("登录用户信息")
 	@GetMapping("info")
 	public Result<SysUserDTO> info() {
-		SysUserDTO result = BeanUtil.copy(SecurityUtils.getUserDetails(), SysUserDTO.class);
+		SysUserDTO result = BeanUtil.copy(SystemSecurityUtils.getUserDetails(), SysUserDTO.class);
 		return Result.success(result);
 	}
 
@@ -96,7 +96,7 @@ public class SysUserController {
 	@PutMapping("password")
 	@PreAuthorize("hasAuthority('sys:user:update')")
 	public Result<Void> password(@RequestBody PasswordDTO dto) {
-		SystemUserDetails user = SecurityUtils.getUserDetails();
+		SystemUserDetails user = SystemSecurityUtils.getUserDetails();
 		if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
 			return Result.error(ErrorCode.System.USER_PASSWORD_ERROR.getCode());
 		}

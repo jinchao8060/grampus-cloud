@@ -2,7 +2,7 @@ package com.oceancloud.grampus.admin.modules.system.controller;
 
 import com.oceancloud.grampus.admin.code.ErrorCode;
 import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
-import com.oceancloud.grampus.admin.modules.security.utils.SecurityUtils;
+import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.service.SysLanguageService;
 import com.oceancloud.grampus.admin.modules.system.service.SysMenuService;
 import com.oceancloud.grampus.framework.core.utils.tree.TreeUtils;
@@ -43,14 +43,14 @@ public class SysMenuController {
 	@ApiOperation("导航栏")
 	@GetMapping("nav")
 	public Result<List<SysMenuDTO>> nav() {
-		List<SysMenuDTO> list = sysMenuService.getUserMenuNavList(SecurityUtils.getUserDetails());
+		List<SysMenuDTO> list = sysMenuService.getUserMenuNavList(SystemSecurityUtils.getUserDetails());
 		return Result.success(list);
 	}
 
 	@ApiOperation("菜单权限")
 	@GetMapping("permissions")
 	public Result<Set<String>> permissions() {
-		Set<String> permissions = sysMenuService.getUserPermissions(SecurityUtils.getUserDetails());
+		Set<String> permissions = sysMenuService.getUserPermissions(SystemSecurityUtils.getUserDetails());
 		return Result.success(permissions);
 	}
 

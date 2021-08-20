@@ -2,8 +2,8 @@ package com.oceancloud.grampus.admin.modules.system.service.impl;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
 import com.oceancloud.grampus.admin.modules.system.enums.MenuTypeEnum;
-import com.oceancloud.grampus.admin.modules.security.enums.SuperAdminEnum;
-import com.oceancloud.grampus.admin.modules.security.users.SystemUserDetails;
+import com.oceancloud.grampus.admin.modules.system.enums.SuperAdminEnum;
+import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 import com.oceancloud.grampus.admin.modules.system.service.SysLanguageService;
 import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
 import com.oceancloud.grampus.framework.core.utils.ObjectUtil;
