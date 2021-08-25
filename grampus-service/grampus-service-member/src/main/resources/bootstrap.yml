@@ -1,0 +1,117 @@
+server:
+  port: 6280
+
+spring:
+  application:
+    name: "@artifactId@"
+  profiles:
+    active: "@profiles.active@"
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS-HOST:grampus-register}:${NACOS-PORT:8848}
+        metadata:
+          management:
+            context-path: /actuator
+          gray:
+            version: @version@
+        namespace: grampus-cloud
+        group: GRAMPUS_CLOUD_GROUP
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        shared-configs:
+          - data-id: common-config.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+          - data-id: gateway-routes.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+    sentinel:
+      filter:
+        url-patterns: /**
+      transport:
+        dashboard: ${SENTINEL-HOST:grampus-sentinel}:${SENTINEL-PORT:8826}
+      eager: true
+      log:
+        dir: logs/${spring.application.name}-sentinel-log
+        switch-pid: true
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            namespace: ${spring.cloud.nacos.discovery.namespace}
+            dataId: sentinel-${spring.application.name}
+            groupId: sentinel-${spring.cloud.nacos.discovery.group}
+            data-type: json
+            rule-type: flow
+
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: grampus_tx_group
+  service:
+    vgroup-mapping:
+      grampus_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      application: ${NACOS-SEATA-APPLICATION:seata-server}
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      group: GRAMPUS_SEATA_GROUP
+      namespace: grampus-seata
+  config:
+    type: ${seata.registry.type}
+    nacos:
+      serverAddr: ${seata.registry.nacos.server-addr}
+      group: ${seata.registry.nacos.group}
+      namespace: ${seata.registry.nacos.namespace}
+
+feign:
+  sentinel:
+    enabled: true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 15000
+        readTimeout: 15000
+
+mybatis:
+  configuration:
+    # 下划线转驼峰
+    map-underscore-to-camel-case: true
+  # 搜索指定包别名
+  typeAliasesPackage: com.oceancloud.grampus.*.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:/mapper/**/*.xml
+
+# mybatis增强配置
+mapper:
+  not-empty: false
+  style: camelhump
+  identity: MYSQL
+  wrap-keyword: "`{0}`"
+  safe-delete: true
+  safe-update: true
+  idgenerator:
+    snowflake:
+      dataCenterId: 8
+      workerId: 4
+
+# PageHelper分页插件
+pagehelper:
+  auto-dialect: true
+  helper-dialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
