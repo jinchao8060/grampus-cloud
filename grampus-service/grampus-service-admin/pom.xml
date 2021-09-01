@@ -50,7 +50,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.oceancloud</groupId>
-			<artifactId>grampus-framework-swagger-micro</artifactId>
+			<artifactId>grampus-framework-knife4j-micro</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.oceancloud</groupId>
