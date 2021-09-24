@@ -34,7 +34,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.oceancloud</groupId>
-			<artifactId>grampus-framework-lock</artifactId>
+			<artifactId>grampus-framework-lock-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.oceancloud</groupId>
+			<artifactId>grampus-framework-lock-redis-template</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.oceancloud</groupId>
