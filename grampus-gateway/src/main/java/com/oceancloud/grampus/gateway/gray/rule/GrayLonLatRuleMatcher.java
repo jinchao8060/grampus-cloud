@@ -1,7 +1,7 @@
 package com.oceancloud.grampus.gateway.gray.rule;
 
 import com.oceancloud.grampus.framework.core.utils.StringUtil;
-import com.oceancloud.grampus.framework.core.utils.geo.GeoUtil;
+import com.oceancloud.grampus.framework.core.utils.location.LocationUtil;
 import com.oceancloud.grampus.gateway.gray.GrayRequestInfo;
 import com.oceancloud.grampus.gateway.gray.GrayRoutesProperties;
 import org.springframework.core.annotation.Order;
@@ -56,7 +56,7 @@ public class GrayLonLatRuleMatcher implements IGrayRuleMatcher {
 
 				double lonReq = Double.parseDouble(curLon);
 				double latReq = Double.parseDouble(curLat);
-				double distance = GeoUtil.getDistance(lon, lat, lonReq, latReq);
+				double distance = LocationUtil.getDistance(lon, lat, lonReq, latReq);
 
 				if (distance <= disRange) {
 					return true;
