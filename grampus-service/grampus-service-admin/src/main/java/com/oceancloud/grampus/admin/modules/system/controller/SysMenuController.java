@@ -5,7 +5,7 @@ import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
 import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.service.SysLanguageService;
 import com.oceancloud.grampus.admin.modules.system.service.SysMenuService;
-import com.oceancloud.grampus.framework.core.utils.tree.TreeUtils;
+import com.oceancloud.grampus.framework.core.utils.tree.TreeUtil;
 import com.oceancloud.grampus.framework.core.result.Result;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
 import io.swagger.annotations.Api;
@@ -60,7 +60,7 @@ public class SysMenuController {
 	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public Result<List<SysMenuDTO>> list(Integer type) {
 		List<SysMenuDTO> list = sysMenuService.getMenuList(type);
-		return Result.success(TreeUtils.build(list));
+		return Result.success(TreeUtil.build(list));
 	}
 
 	@ApiOperation("菜单信息")

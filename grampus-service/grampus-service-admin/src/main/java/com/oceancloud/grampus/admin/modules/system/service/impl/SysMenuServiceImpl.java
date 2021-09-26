@@ -9,7 +9,7 @@ import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
 import com.oceancloud.grampus.framework.core.utils.ObjectUtil;
 import com.oceancloud.grampus.framework.core.utils.WebUtil;
 import com.oceancloud.grampus.framework.core.utils.chars.StringPool;
-import com.oceancloud.grampus.framework.core.utils.tree.TreeUtils;
+import com.oceancloud.grampus.framework.core.utils.tree.TreeUtil;
 import com.oceancloud.grampus.framework.core.utils.BeanUtil;
 import com.oceancloud.grampus.admin.modules.system.dao.SysMenuDao;
 import com.oceancloud.grampus.admin.modules.system.entity.SysMenu;
@@ -58,7 +58,7 @@ public class SysMenuServiceImpl extends EnhancedBaseServiceImpl<SysMenuDao, SysM
 			convertLanguage(menuList);
 			sysMenuList = BeanUtil.copyList(menuList, SysMenuDTO.class);
 		}
-		return TreeUtils.build(sysMenuList);
+		return TreeUtil.build(sysMenuList);
 	}
 
 	@Override

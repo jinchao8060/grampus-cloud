@@ -3,7 +3,7 @@ package com.oceancloud.grampus.admin.modules.system.controller;
 import com.oceancloud.grampus.admin.modules.system.dto.SysDeptDTO;
 import com.oceancloud.grampus.admin.modules.system.service.SysDeptService;
 import com.oceancloud.grampus.framework.core.result.Result;
-import com.oceancloud.grampus.framework.core.utils.tree.TreeUtils;
+import com.oceancloud.grampus.framework.core.utils.tree.TreeUtil;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,7 +39,7 @@ public class SysDeptController {
 	@PreAuthorize("hasAuthority('sys:dept:list')")
 	public Result<List<SysDeptDTO>> list() {
 		List<SysDeptDTO> result = sysDeptService.queryAll();
-		return Result.success(TreeUtils.build(result));
+		return Result.success(TreeUtil.build(result));
 	}
 
 	@ApiOperation("部门信息")
