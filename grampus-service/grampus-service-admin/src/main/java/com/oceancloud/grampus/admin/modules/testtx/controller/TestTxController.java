@@ -27,7 +27,7 @@ import java.util.Map;
 @Api(tags = "")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/admin/testTx")
+@RequestMapping("/rmi/admin/testTx")
 public class TestTxController {
 
 	private final TestTxService testTxService;
