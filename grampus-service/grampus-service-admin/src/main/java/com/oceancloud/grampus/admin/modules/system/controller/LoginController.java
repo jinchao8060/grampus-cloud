@@ -41,7 +41,7 @@ public class LoginController {
 
 		Map<String, Object> result = remoteOAuthTokenClient.oauthToken(
 				username, password, "password", "all",
-				"client_1", "123456");
+				"client_system", "123456");
 
 		if (result.get("status") != null) {
 			return result;
