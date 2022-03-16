@@ -56,6 +56,10 @@
 			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-framework-knife4j-micro</artifactId>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.oceancloud</groupId>-->
+<!--			<artifactId>grampus-framework-rabbitmq</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.oceancloud</groupId>
 			<artifactId>grampus-client-admin</artifactId>

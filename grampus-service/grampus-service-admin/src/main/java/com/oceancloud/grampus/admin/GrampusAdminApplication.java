@@ -1,7 +1,7 @@
 package com.oceancloud.grampus.admin;
 
 import com.oceancloud.grampus.framework.oauth2.annotation.EnableGrampusResourceServer;
-import com.oceancloud.grampus.framework.gray.annotation.EnableGrayLoadBalancer;
+//import com.oceancloud.grampus.framework.rabbitmq.annotation.EnableEnhancedRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -14,6 +14,7 @@ import java.util.TimeZone;
  * @author Beck
  * @since 2021-06-15
  */
+//@EnableEnhancedRabbit
 @EnableGrampusResourceServer
 //@EnableGrayLoadBalancer
 @EnableFeignClients(basePackages = {"com.oceancloud.grampus"})
