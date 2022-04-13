@@ -25,7 +25,7 @@ public class SysDictItemServiceImpl extends EnhancedBaseServiceImpl<SysDictItemD
 
 	@Override
 	public void save(SysDictItemDTO dto) {
-		SysDict sysDict = sysDictDao.selectByPrimaryKey(dto.getDictId());
+		SysDict sysDict = sysDictDao.selectById(dto.getDictId());
 		SysDictItem entity = BeanUtil.copy(dto, SysDictItem.class);
 		entity.setDictType(sysDict.getDictType());
 		this.insert(entity);

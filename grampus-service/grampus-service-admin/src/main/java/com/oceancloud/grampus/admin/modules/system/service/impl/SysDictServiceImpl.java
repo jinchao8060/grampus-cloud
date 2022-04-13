@@ -1,6 +1,5 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
-import com.google.common.base.Joiner;
 import com.oceancloud.grampus.admin.modules.system.dto.SysDictDTO;
 import com.oceancloud.grampus.admin.modules.system.dao.SysDictDao;
 import com.oceancloud.grampus.admin.modules.system.dto.SysDictItemDTO;
@@ -50,6 +49,6 @@ public class SysDictServiceImpl extends EnhancedBaseServiceImpl<SysDictDao, SysD
 		if (CollectionUtil.isNotEmpty(itemIdSet)) {
 			sysDictItemService.deleteBatchIds(itemIdSet);
 		}
-		this.baseMapper.deleteByIds(Joiner.on(",").join(idList));
+		this.baseMapper.deleteBatchIds(idList);
 	}
 }

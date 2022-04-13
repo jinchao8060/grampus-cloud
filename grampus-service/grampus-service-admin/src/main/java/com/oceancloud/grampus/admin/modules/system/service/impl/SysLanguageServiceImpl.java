@@ -1,5 +1,7 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.google.common.collect.Maps;
 import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
 import com.oceancloud.grampus.framework.core.utils.ObjectUtil;
@@ -10,8 +12,6 @@ import com.oceancloud.grampus.admin.modules.system.entity.SysLanguage;
 import com.oceancloud.grampus.admin.modules.system.dto.SysLanguageDTO;
 import com.oceancloud.grampus.admin.modules.system.service.SysLanguageService;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.weekend.WeekendSqls;
 
 import java.util.List;
 import java.util.Map;
@@ -28,14 +28,21 @@ public class SysLanguageServiceImpl extends EnhancedBaseServiceImpl<SysLanguageD
 
 	@Override
 	public String convertFieldValue(String tableName, Long tableId, String fieldName, String language) {
-		SysLanguage entity = baseMapper.selectOneByExample(Example.builder(SysLanguage.class)
-				.select("fieldValue")
-				.where(WeekendSqls.<SysLanguage>custom()
-						.andEqualTo(SysLanguage::getTableName, tableName)
-						.andEqualTo(SysLanguage::getTableId, tableId)
-						.andEqualTo(SysLanguage::getFieldName, fieldName)
-						.andEqualTo(SysLanguage::getLanguage, language))
-				.build());
+//		SysLanguage entity = baseMapper.selectOneByExample(Example.builder(SysLanguage.class)
+//				.select("fieldValue")
+//				.where(WeekendSqls.<SysLanguage>custom()
+//						.andEqualTo(SysLanguage::getTableName, tableName)
+//						.andEqualTo(SysLanguage::getTableId, tableId)
+//						.andEqualTo(SysLanguage::getFieldName, fieldName)
+//						.andEqualTo(SysLanguage::getLanguage, language))
+//				.build());
+		LambdaQueryWrapper<SysLanguage> wrapper = Wrappers.<SysLanguage>lambdaQuery()
+				.select(SysLanguage::getFieldValue)
+				.eq(SysLanguage::getTableName, tableName)
+				.eq(SysLanguage::getTableId, tableId)
+				.eq(SysLanguage::getFieldName, fieldName)
+				.eq(SysLanguage::getLanguage, language);
+		SysLanguage entity = baseMapper.selectOne(wrapper);
 		return ObjectUtil.isNull(entity) ? "" : entity.getFieldValue();
 	}
 
@@ -48,14 +55,21 @@ public class SysLanguageServiceImpl extends EnhancedBaseServiceImpl<SysLanguageD
 		if (StringUtil.isBlank(language)) {
 			language = "zh-CN";
 		}
-		List<SysLanguage> list = baseMapper.selectByExample(Example.builder(SysLanguage.class)
-				.select("tableId", "fieldValue")
-				.where(WeekendSqls.<SysLanguage>custom()
-						.andEqualTo(SysLanguage::getTableName, tableName)
-						.andEqualTo(SysLanguage::getFieldName, fieldName)
-						.andEqualTo(SysLanguage::getLanguage, language)
-						.andIn(SysLanguage::getTableId, tableIdList)
-				).build());
+//		List<SysLanguage> list = baseMapper.selectByExample(Example.builder(SysLanguage.class)
+//				.select("tableId", "fieldValue")
+//				.where(WeekendSqls.<SysLanguage>custom()
+//						.andEqualTo(SysLanguage::getTableName, tableName)
+//						.andEqualTo(SysLanguage::getFieldName, fieldName)
+//						.andEqualTo(SysLanguage::getLanguage, language)
+//						.andIn(SysLanguage::getTableId, tableIdList)
+//				).build());
+		LambdaQueryWrapper<SysLanguage> wrapper = Wrappers.<SysLanguage>lambdaQuery()
+				.select(SysLanguage::getTableId, SysLanguage::getFieldValue)
+				.eq(SysLanguage::getTableName, tableName)
+				.eq(SysLanguage::getFieldName, fieldName)
+				.eq(SysLanguage::getLanguage, language)
+				.in(SysLanguage::getTableId, tableIdList);
+		List<SysLanguage> list = baseMapper.selectList(wrapper);
 		return list.stream().collect(Collectors.toMap(SysLanguage::getTableId, SysLanguage::getFieldValue));
 	}
 }

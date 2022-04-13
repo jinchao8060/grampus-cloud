@@ -1,8 +1,6 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysParamDTO;
-import com.oceancloud.grampus.framework.mybatis.service.EnhancedBaseService;
-import com.oceancloud.grampus.framework.mybatis.service.impl.BaseServiceImpl;
 import com.oceancloud.grampus.admin.modules.system.dao.SysParamDao;
 import com.oceancloud.grampus.admin.modules.system.entity.SysParam;
 import com.oceancloud.grampus.admin.modules.system.service.SysParamService;

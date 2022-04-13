@@ -1,5 +1,7 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserDTO;
 import com.oceancloud.grampus.admin.modules.system.enums.SuperAdminEnum;
 import com.oceancloud.grampus.auth.modules.system.client.feign.RemoteSystemUserDetailsClient;
@@ -34,10 +36,14 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 
 	@Override
 	public SysUser getSysUserByUserNo(String userNo) {
-		SysUser entity = new SysUser();
-		entity.setUserNo(userNo);
-		entity.setDelFlag(DelFlagEnum.NORMAL.getValue());
-		return baseMapper.selectOne(entity);
+//		SysUser entity = new SysUser();
+//		entity.setUserNo(userNo);
+//		entity.setDelFlag(DelFlagEnum.NORMAL.getValue());
+
+		LambdaQueryWrapper<SysUser> wrapper = Wrappers.<SysUser>lambdaQuery()
+				.eq(SysUser::getUserNo, userNo)
+				.eq(SysUser::getDelFlag, DelFlagEnum.NORMAL.getValue());
+		return baseMapper.selectOne(wrapper);
 	}
 
 	@Override
@@ -51,7 +57,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 		SysUser entity = new SysUser();
 		entity.setId(userId);
 		entity.setPassword(StringUtil.isNotBlank(newPassword) ? passwordEncoder.encode(newPassword) : null);
-		baseMapper.updateByPrimaryKeySelective(entity);
+		baseMapper.updateById(entity);
 	}
 
 	@Override
