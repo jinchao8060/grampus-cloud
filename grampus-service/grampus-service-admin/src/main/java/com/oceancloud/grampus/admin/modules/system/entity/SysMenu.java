@@ -1,11 +1,10 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import tk.mybatis.mapper.annotation.LogicDelete;
-
-import javax.persistence.Table;
 
 /**
  * 菜单表 实体类
@@ -15,7 +14,7 @@ import javax.persistence.Table;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "sys_menu")
+@TableName("sys_menu")
 public class SysMenu extends BaseEntity {
 	private static final long serialVersionUID = 803530310552398145L;
 	/**
@@ -49,6 +48,6 @@ public class SysMenu extends BaseEntity {
 	/**
 	 * 删除标识(0正常 1删除)
 	 */
-	@LogicDelete
+	@TableLogic
 	private Integer delFlag;
 }
