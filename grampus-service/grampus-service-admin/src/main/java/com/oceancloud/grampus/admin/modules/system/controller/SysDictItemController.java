@@ -60,7 +60,7 @@ public class SysDictItemController {
 	@PostMapping
 	@PreAuthorize("hasAuthority('sys:dict:save')")
 	public Result<Void> save(@RequestBody SysDictItemDTO dto) {
-		sysDictItemService.save(dto);
+		sysDictItemService.saveOne(dto);
 		return Result.success();
 	}
 
@@ -78,7 +78,7 @@ public class SysDictItemController {
 	@DeleteMapping
 	@PreAuthorize("hasAuthority('sys:dict:delete')")
 	public Result<Void> delete(@RequestBody List<Long> ids) {
-		sysDictItemService.deleteBatchIds(ids);
+		sysDictItemService.removeBatchByIds(ids);
 		return Result.success();
 	}
 }

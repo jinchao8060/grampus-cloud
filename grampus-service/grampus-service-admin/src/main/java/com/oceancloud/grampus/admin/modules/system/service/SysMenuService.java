@@ -1,9 +1,9 @@
 package com.oceancloud.grampus.admin.modules.system.service;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
-import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 import com.oceancloud.grampus.admin.modules.system.entity.SysMenu;
 import com.oceancloud.grampus.framework.mybatis.service.EnhancedBaseService;
+import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 
 import java.util.List;
 import java.util.Set;

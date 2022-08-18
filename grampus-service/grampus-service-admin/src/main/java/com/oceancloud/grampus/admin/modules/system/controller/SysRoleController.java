@@ -69,7 +69,7 @@ public class SysRoleController {
 	@PostMapping
 	@PreAuthorize("hasAuthority('sys:role:save')")
 	public Result<Void> save(@RequestBody SysRoleDTO dto) {
-		sysRoleService.save(dto);
+		sysRoleService.saveOne(dto);
 		return Result.success();
 	}
 
@@ -87,7 +87,7 @@ public class SysRoleController {
 	@DeleteMapping
 	@PreAuthorize("hasAuthority('sys:role:delete')")
 	public Result<Void> delete(@RequestBody List<Long> ids) {
-		sysRoleService.deleteBatchIds(ids);
+		sysRoleService.removeBatchByIds(ids);
 		return Result.success();
 	}
 }

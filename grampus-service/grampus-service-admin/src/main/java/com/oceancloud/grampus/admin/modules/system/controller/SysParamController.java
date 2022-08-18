@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统参数管理
@@ -64,7 +63,7 @@ public class SysParamController {
 	@PostMapping
 	@PreAuthorize("hasAuthority('sys:param:save')")
 	public Result<Void> save(@RequestBody SysParamDTO dto) {
-		sysParamService.save(dto);
+		sysParamService.saveOne(dto);
 		return Result.success();
 	}
 
@@ -82,7 +81,7 @@ public class SysParamController {
 	@DeleteMapping
 	@PreAuthorize("hasAuthority('sys:param:delete')")
 	public Result<Void> delete(@RequestBody List<Long> ids) {
-		sysParamService.deleteBatchIds(ids);
+		sysParamService.removeBatchByIds(ids);
 		return Result.success();
 	}
 
@@ -92,8 +91,8 @@ public class SysParamController {
 	@ResponseExcel(name = "系统参数")
 	@PreAuthorize("hasAuthority('sys:param:export')")
 	@ApiImplicitParam(name = "code", value = "参数编码", paramType = "query", dataType = "String")
-	public List<SysParamExcel> export(@ApiIgnore @RequestParam Map<String, Object> params) {
-		List<SysParamDTO> list = sysParamService.queryList(params);
+	public List<SysParamExcel> export(@ApiIgnore @RequestParam SysParamQuery params) {
+		List<SysParamDTO> list = sysParamService.queryList(BeanUtil.copy(params, SysParamDTO.class));
 		return BeanUtil.copyList(list, SysParamExcel.class);
 	}
 }

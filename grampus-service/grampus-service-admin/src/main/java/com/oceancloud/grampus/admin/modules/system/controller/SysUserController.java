@@ -4,8 +4,6 @@ import com.oceancloud.grampus.admin.code.ErrorCode;
 import com.oceancloud.grampus.admin.modules.system.dto.PasswordDTO;
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserDTO;
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserReqDTO;
-import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
-import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.query.SysUserQuery;
 import com.oceancloud.grampus.admin.modules.system.service.SysUserRoleService;
 import com.oceancloud.grampus.admin.modules.system.service.SysUserService;
@@ -14,6 +12,8 @@ import com.oceancloud.grampus.framework.core.utils.BeanUtil;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
 import com.oceancloud.grampus.framework.mybatis.page.PageData;
 import com.oceancloud.grampus.framework.mybatis.page.PageQuery;
+import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
+import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -77,7 +77,7 @@ public class SysUserController {
 	@PreAuthorize("hasAuthority('sys:user:save')")
 	public Result<Void> save(@RequestBody SysUserReqDTO reqDTO) {
 		SysUserDTO dto = BeanUtil.copy(reqDTO, SysUserDTO.class);
-		sysUserService.save(dto);
+		sysUserService.saveOne(dto);
 		return Result.success();
 	}
 
@@ -109,7 +109,7 @@ public class SysUserController {
 	@DeleteMapping
 	@PreAuthorize("hasAuthority('sys:user:delete')")
 	public Result<Void> delete(@RequestBody List<Long> ids) {
-		sysUserService.deleteBatchIds(ids);
+		sysUserService.removeBatchByIds(ids);
 		return Result.success();
 	}
 }

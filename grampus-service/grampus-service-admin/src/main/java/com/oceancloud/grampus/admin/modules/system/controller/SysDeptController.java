@@ -55,7 +55,7 @@ public class SysDeptController {
 	@PostMapping()
 	@PreAuthorize("hasAuthority('sys:dept:save')")
 	public Result<Void> save(@RequestBody SysDeptDTO sysDeptDTO) {
-		sysDeptService.save(sysDeptDTO);
+		sysDeptService.saveOne(sysDeptDTO);
 		return Result.success();
 	}
 
@@ -73,7 +73,7 @@ public class SysDeptController {
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('sys:dept:delete')")
 	public Result<Void> delete(@PathVariable Long id) {
-		sysDeptService.deleteById(id);
+		sysDeptService.removeById(id);
 		return Result.success();
 	}
 }

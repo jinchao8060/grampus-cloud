@@ -1,7 +1,7 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
-import com.oceancloud.grampus.admin.modules.system.dto.SysDictDTO;
 import com.oceancloud.grampus.admin.modules.system.dao.SysDictDao;
+import com.oceancloud.grampus.admin.modules.system.dto.SysDictDTO;
 import com.oceancloud.grampus.admin.modules.system.dto.SysDictItemDTO;
 import com.oceancloud.grampus.admin.modules.system.entity.SysDict;
 import com.oceancloud.grampus.admin.modules.system.service.SysDictItemService;
@@ -13,7 +13,6 @@ import org.assertj.core.util.Sets;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -38,17 +37,19 @@ public class SysDictServiceImpl extends EnhancedBaseServiceImpl<SysDictDao, SysD
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void deleteBatchIds(Collection<? extends Serializable> idList) {
+	public boolean removeBatchByIds(Collection<?> idList) {
 		Set<Long> itemIdSet = Sets.newLinkedHashSet();
-		for (Serializable id : idList) {
+		for (Object id : idList) {
 			SysDictItemDTO params = new SysDictItemDTO();
 			params.setDictId((Long) id);
 			List<SysDictItemDTO> itemList = sysDictItemService.queryList(params);
 			itemIdSet.addAll(itemList.stream().map(SysDictItemDTO::getId).collect(Collectors.toSet()));
 		}
 		if (CollectionUtil.isNotEmpty(itemIdSet)) {
-			sysDictItemService.deleteBatchIds(itemIdSet);
+			sysDictItemService.removeBatchByIds(itemIdSet);
 		}
 		this.baseMapper.deleteBatchIds(idList);
+		// TODO 优化删除结果
+		return true;
 	}
 }

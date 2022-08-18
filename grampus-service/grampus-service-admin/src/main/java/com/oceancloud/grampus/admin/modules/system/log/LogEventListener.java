@@ -30,6 +30,6 @@ public class LogEventListener {
 	public void onApplicationEvent(LogEvent event) {
 		LogOperation logOperation = BeanUtil.copy(event, LogOperation.class);
 		logOperation.setSubject(null);
-		logOperationService.insert(logOperation);
+		logOperationService.save(logOperation);
 	}
 }

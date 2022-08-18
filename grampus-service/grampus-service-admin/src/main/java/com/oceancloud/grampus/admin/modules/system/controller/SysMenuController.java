@@ -2,12 +2,12 @@ package com.oceancloud.grampus.admin.modules.system.controller;
 
 import com.oceancloud.grampus.admin.code.ErrorCode;
 import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
-import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.service.SysLanguageService;
 import com.oceancloud.grampus.admin.modules.system.service.SysMenuService;
-import com.oceancloud.grampus.framework.core.utils.tree.TreeUtil;
 import com.oceancloud.grampus.framework.core.result.Result;
+import com.oceancloud.grampus.framework.core.utils.tree.TreeUtil;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
+import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -80,7 +80,7 @@ public class SysMenuController {
 	@PostMapping
 	@PreAuthorize("hasAuthority('sys:menu:save')")
 	public Result<Void> save(@RequestBody SysMenuDTO dto) {
-		sysMenuService.save(dto);
+		sysMenuService.saveOne(dto);
 		return Result.success();
 	}
 
@@ -103,7 +103,7 @@ public class SysMenuController {
 		if (list.size() > 0) {
 			return Result.error(ErrorCode.System.SUB_MENU_EXIST.getCode());
 		}
-		sysMenuService.deleteById(id);
+		sysMenuService.removeById(id);
 		return Result.success();
 	}
 }

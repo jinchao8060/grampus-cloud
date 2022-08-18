@@ -2,19 +2,19 @@ package com.oceancloud.grampus.admin.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.oceancloud.grampus.admin.modules.system.dao.SysUserDao;
 import com.oceancloud.grampus.admin.modules.system.dto.SysUserDTO;
+import com.oceancloud.grampus.admin.modules.system.entity.SysUser;
 import com.oceancloud.grampus.admin.modules.system.enums.SuperAdminEnum;
-import com.oceancloud.grampus.auth.modules.system.client.feign.RemoteSystemUserDetailsClient;
-import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.admin.modules.system.service.SysUserRoleService;
+import com.oceancloud.grampus.admin.modules.system.service.SysUserService;
+import com.oceancloud.grampus.auth.modules.system.client.feign.RemoteSystemUserDetailsClient;
 import com.oceancloud.grampus.framework.core.utils.BeanUtil;
 import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
 import com.oceancloud.grampus.framework.core.utils.StringUtil;
 import com.oceancloud.grampus.framework.mybatis.enums.DelFlagEnum;
-import com.oceancloud.grampus.admin.modules.system.dao.SysUserDao;
-import com.oceancloud.grampus.admin.modules.system.entity.SysUser;
-import com.oceancloud.grampus.admin.modules.system.service.SysUserService;
 import com.oceancloud.grampus.framework.mybatis.service.impl.EnhancedBaseServiceImpl;
+import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 
 	@Override
 	public void updatePassword(Long userId, String newPassword) {
-		SysUser sysUser = selectById(userId);
+		SysUser sysUser = getById(userId);
 		// 超管才能修改超管
 		if (SuperAdminEnum.TRUE.getValue().equals(sysUser.getSuperAdmin())
 				&& !SuperAdminEnum.TRUE.getValue().equals(SystemSecurityUtils.getUserDetails().getSuperAdmin())) {
@@ -62,7 +62,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void save(SysUserDTO dto) {
+	public void saveOne(SysUserDTO dto) {
 		SysUser entity = BeanUtil.copy(dto, SysUser.class);
 		String plainPwd = entity.getPassword();
 		// 新建账号支持空密码
@@ -78,7 +78,7 @@ public class SysUserServiceImpl extends EnhancedBaseServiceImpl<SysUserDao, SysU
 	@Transactional(rollbackFor = Exception.class)
 	public void modifyById(SysUserDTO dto) {
 		SysUser entity = BeanUtil.copy(dto, SysUser.class);
-		SysUser sysUser = selectById(entity.getId());
+		SysUser sysUser = getById(entity.getId());
 		// 超管才能修改超管
 		if (SuperAdminEnum.TRUE.getValue().equals(sysUser.getSuperAdmin())
 				&& !SuperAdminEnum.TRUE.getValue().equals(SystemSecurityUtils.getUserDetails().getSuperAdmin())) {

@@ -2,14 +2,13 @@ package com.oceancloud.grampus.admin.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.oceancloud.grampus.framework.mybatis.service.impl.BaseServiceImpl;
 import com.oceancloud.grampus.admin.modules.system.dao.SysRoleMenuDao;
 import com.oceancloud.grampus.admin.modules.system.entity.SysRoleMenu;
 import com.oceancloud.grampus.admin.modules.system.service.SysRoleMenuService;
+import com.oceancloud.grampus.framework.mybatis.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,7 +63,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysR
 	}
 
 	@Override
-	public void deleteByRoleIds(Collection<? extends Serializable> roleIds) {
+	public void deleteByRoleIds(Collection<?> roleIds) {
 //		baseMapper.deleteByExample(Example.builder(SysRoleMenu.class)
 //				.where(Sqls.custom().andIn("roleId", roleIds))
 //				.build());
