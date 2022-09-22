@@ -10,7 +10,7 @@ import java.util.List;
  * 字典表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:47:47
+ * @since 2020-12-09
  */
 public interface SysDictService extends EnhancedBaseService<SysDict, SysDictDTO> {
 

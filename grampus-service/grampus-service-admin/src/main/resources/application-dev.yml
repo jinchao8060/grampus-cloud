@@ -34,6 +34,16 @@ spring:
         min-idle: 5
         max-active: 1000
         max-wait: 20000ms
+#  rabbitmq:
+#    addresses: 192.168.0.97:5672,192.168.0.142:5672,192.168.0.176:5672
+#    username: grampus
+#    password: grampus
+#    virtual-host: /grampus
+#    listener:
+#      simple:
+#        acknowledge-mode: manual
+#      direct:
+#        acknowledge-mode: manual
 
 logging:
   level:

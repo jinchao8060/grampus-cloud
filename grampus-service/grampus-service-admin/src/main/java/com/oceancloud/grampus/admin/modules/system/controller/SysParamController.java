@@ -2,16 +2,16 @@ package com.oceancloud.grampus.admin.modules.system.controller;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysParamDTO;
 import com.oceancloud.grampus.admin.modules.system.excel.SysParamExcel;
+import com.oceancloud.grampus.admin.modules.system.query.SysParamQuery;
 import com.oceancloud.grampus.admin.modules.system.service.SysParamService;
-import com.oceancloud.grampus.framework.core.constant.Constant;
 import com.oceancloud.grampus.framework.core.result.Result;
 import com.oceancloud.grampus.framework.core.utils.BeanUtil;
 import com.oceancloud.grampus.framework.excel.annotation.ResponseExcel;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
 import com.oceancloud.grampus.framework.mybatis.page.PageData;
+import com.oceancloud.grampus.framework.mybatis.page.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统参数管理
@@ -45,16 +44,9 @@ public class SysParamController {
 
 	@ApiOperation("参数分页查询")
 	@GetMapping("page")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = Constant.PAGE_NUM, value = "当前页码，从1开始", paramType = "query", required = true, dataType = "int"),
-			@ApiImplicitParam(name = Constant.PAGE_SIZE, value = "每页显示记录数", paramType = "query", required = true, dataType = "int"),
-			@ApiImplicitParam(name = Constant.ORDER, value = "排序条件(field1#asc,field2#desc)", paramType = "query", dataType = "String"),
-			@ApiImplicitParam(name = Constant.WITH_COUNT, value = "查询数据总量(true、false)", paramType = "query", dataType = "Boolean"),
-			@ApiImplicitParam(name = "code", value = "参数编码", paramType = "query", dataType = "String")
-	})
 	@PreAuthorize("hasAuthority('sys:param:list')")
-	public Result<PageData<SysParamDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
-		PageData<SysParamDTO> result = sysParamService.queryPage(params);
+	public Result<PageData<SysParamDTO>> page(PageQuery pageQuery, SysParamQuery params) {
+		PageData<SysParamDTO> result = sysParamService.queryPage(pageQuery, params);
 		return Result.success(result);
 	}
 
@@ -71,7 +63,7 @@ public class SysParamController {
 	@PostMapping
 	@PreAuthorize("hasAuthority('sys:param:save')")
 	public Result<Void> save(@RequestBody SysParamDTO dto) {
-		sysParamService.save(dto);
+		sysParamService.saveOne(dto);
 		return Result.success();
 	}
 
@@ -89,7 +81,7 @@ public class SysParamController {
 	@DeleteMapping
 	@PreAuthorize("hasAuthority('sys:param:delete')")
 	public Result<Void> delete(@RequestBody List<Long> ids) {
-		sysParamService.deleteBatchIds(ids);
+		sysParamService.removeBatchByIds(ids);
 		return Result.success();
 	}
 
@@ -99,8 +91,8 @@ public class SysParamController {
 	@ResponseExcel(name = "系统参数")
 	@PreAuthorize("hasAuthority('sys:param:export')")
 	@ApiImplicitParam(name = "code", value = "参数编码", paramType = "query", dataType = "String")
-	public List<SysParamExcel> export(@ApiIgnore @RequestParam Map<String, Object> params) {
-		List<SysParamDTO> list = sysParamService.queryList(params);
+	public List<SysParamExcel> export(@ApiIgnore @RequestParam SysParamQuery params) {
+		List<SysParamDTO> list = sysParamService.queryList(BeanUtil.copy(params, SysParamDTO.class));
 		return BeanUtil.copyList(list, SysParamExcel.class);
 	}
 }

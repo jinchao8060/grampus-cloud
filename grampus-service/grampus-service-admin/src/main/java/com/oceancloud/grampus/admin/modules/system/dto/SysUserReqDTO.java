@@ -13,8 +13,8 @@ import java.util.List;
  * @author Beck
  * @since 2021-06-02
  */
-@ApiModel("系统用户")
 @Data
+@ApiModel("系统用户")
 public class SysUserReqDTO implements Serializable {
 	private static final long serialVersionUID = 1318536021225511284L;
 	/**

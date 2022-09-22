@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 操作日志表(LogOperation) 表数据传输对象
  *
  * @author Beck
- * @since 2021-05-31 17:05:41
+ * @since 2021-05-31
  */
 @Data
 @ApiModel("操作日志表")

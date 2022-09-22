@@ -1,23 +1,23 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.annotation.FieldFill;
 import com.oceancloud.grampus.framework.mybatis.annotation.TableField;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
  * 字典表 实体类
  *
  * @author Beck
- * @since 2020-12-09 19:47:45
+ * @since 2020-12-09
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "sys_dict")
+@TableName("sys_dict")
 public class SysDict extends BaseEntity {
 	private static final long serialVersionUID = 136388614256596989L;
 	/**

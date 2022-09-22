@@ -6,7 +6,7 @@ import com.oceancloud.grampus.admin.modules.security.roles.dao.SystemRoleDao;
 import com.oceancloud.grampus.admin.modules.security.roles.dto.SystemRolePermDTO;
 import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
 import com.oceancloud.grampus.framework.core.utils.StringUtil;
-import com.oceancloud.grampus.framework.core.utils.chars.StringPool;
+import com.oceancloud.grampus.framework.core.utils.StringPool;
 import lombok.AllArgsConstructor;
 import org.assertj.core.util.Sets;
 import org.springframework.stereotype.Service;

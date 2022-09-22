@@ -1,9 +1,8 @@
 package com.oceancloud.grampus.admin.modules.system.service;
 
-import com.oceancloud.grampus.framework.mybatis.service.BaseService;
 import com.oceancloud.grampus.admin.modules.system.entity.SysRoleMenu;
+import com.oceancloud.grampus.framework.mybatis.service.BaseService;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * 角色菜单表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:50:43
+ * @since 2020-12-09
  */
 public interface SysRoleMenuService extends BaseService<SysRoleMenu> {
 
@@ -36,5 +35,5 @@ public interface SysRoleMenuService extends BaseService<SysRoleMenu> {
 	 *
 	 * @param roleIds 角色ID
 	 */
-	void deleteByRoleIds(Collection<? extends Serializable> roleIds);
+	void deleteByRoleIds(Collection<?> roleIds);
 }

@@ -1,34 +1,37 @@
 package com.oceancloud.grampus.admin.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.oceancloud.grampus.admin.modules.system.dao.SysMenuDao;
 import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
+import com.oceancloud.grampus.admin.modules.system.entity.SysMenu;
 import com.oceancloud.grampus.admin.modules.system.enums.MenuTypeEnum;
 import com.oceancloud.grampus.admin.modules.system.enums.SuperAdminEnum;
 import com.oceancloud.grampus.admin.modules.system.service.SysLanguageService;
-import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
-import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
-import com.oceancloud.grampus.framework.core.utils.ObjectUtil;
-import com.oceancloud.grampus.framework.core.utils.WebUtil;
-import com.oceancloud.grampus.framework.core.utils.chars.StringPool;
-import com.oceancloud.grampus.framework.core.utils.tree.TreeUtils;
-import com.oceancloud.grampus.framework.core.utils.BeanUtil;
-import com.oceancloud.grampus.admin.modules.system.dao.SysMenuDao;
-import com.oceancloud.grampus.admin.modules.system.entity.SysMenu;
 import com.oceancloud.grampus.admin.modules.system.service.SysMenuService;
+import com.oceancloud.grampus.framework.core.utils.BeanUtil;
+import com.oceancloud.grampus.framework.core.utils.CollectionUtil;
+import com.oceancloud.grampus.framework.core.utils.StringPool;
 import com.oceancloud.grampus.framework.core.utils.StringUtil;
+import com.oceancloud.grampus.framework.core.utils.WebUtil;
+import com.oceancloud.grampus.framework.core.utils.tree.TreeUtil;
 import com.oceancloud.grampus.framework.mybatis.service.impl.EnhancedBaseServiceImpl;
+import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.weekend.WeekendSqls;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * 菜单表 服务实现类
  *
  * @author Beck
- * @since 2020-12-09 19:49:31
+ * @since 2020-12-09
  */
 @AllArgsConstructor
 @Service("sysMenuService")
@@ -38,11 +41,13 @@ public class SysMenuServiceImpl extends EnhancedBaseServiceImpl<SysMenuDao, SysM
 
 	@Override
 	public List<SysMenuDTO> getMenuList(Integer type) {
-		Example.Builder exampleBuilder = Example.builder(SysMenu.class).orderBy("sort", "id");
-		if (ObjectUtil.isNotEmpty(type)) {
-			exampleBuilder = exampleBuilder.where(WeekendSqls.<SysMenu>custom().andEqualTo(SysMenu::getType, type));
-		}
-		List<SysMenu> menuList = baseMapper.selectByExample(exampleBuilder.build());
+//		Example.Builder exampleBuilder = Example.builder(SysMenu.class).orderBy("sort", "id");
+//		if (ObjectUtil.isNotEmpty(type)) {
+//			exampleBuilder = exampleBuilder.where(WeekendSqls.<SysMenu>custom().andEqualTo(SysMenu::getType, type));
+//		}
+//		List<SysMenu> menuList = baseMapper.selectByExample(exampleBuilder.build());
+		LambdaQueryWrapper<SysMenu> wrapper = Wrappers.<SysMenu>lambdaQuery().eq(type != null, SysMenu::getType, type);
+		List<SysMenu> menuList = baseMapper.selectList(wrapper);
 		convertLanguage(menuList);
 		return BeanUtil.copyList(menuList, SysMenuDTO.class);
 	}
@@ -58,7 +63,7 @@ public class SysMenuServiceImpl extends EnhancedBaseServiceImpl<SysMenuDao, SysM
 			convertLanguage(menuList);
 			sysMenuList = BeanUtil.copyList(menuList, SysMenuDTO.class);
 		}
-		return TreeUtils.build(sysMenuList);
+		return TreeUtil.build(sysMenuList);
 	}
 
 	@Override
@@ -76,9 +81,10 @@ public class SysMenuServiceImpl extends EnhancedBaseServiceImpl<SysMenuDao, SysM
 
 	@Override
 	public List<SysMenuDTO> getListByPid(Long pid) {
-		SysMenu sysMenu = new SysMenu();
-		sysMenu.setParentId(pid);
-		List<SysMenu> menuList = baseMapper.select(sysMenu);
+//		SysMenu sysMenu = new SysMenu();
+//		sysMenu.setParentId(pid);
+		LambdaQueryWrapper<SysMenu> wrapper = Wrappers.<SysMenu>lambdaQuery().eq(SysMenu::getParentId, pid);
+		List<SysMenu> menuList = baseMapper.selectList(wrapper);
 		convertLanguage(menuList);
 		return BeanUtil.copyList(menuList, SysMenuDTO.class);
 	}

@@ -8,7 +8,7 @@ import com.oceancloud.grampus.framework.mybatis.service.EnhancedBaseService;
  * 角色表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:50:16
+ * @since 2020-12-09
  */
 public interface SysRoleService extends EnhancedBaseService<SysRole, SysRoleDTO> {
 

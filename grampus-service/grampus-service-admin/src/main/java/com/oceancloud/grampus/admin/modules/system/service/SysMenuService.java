@@ -2,8 +2,8 @@ package com.oceancloud.grampus.admin.modules.system.service;
 
 import com.oceancloud.grampus.admin.modules.system.dto.SysMenuDTO;
 import com.oceancloud.grampus.admin.modules.system.entity.SysMenu;
-import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 import com.oceancloud.grampus.framework.mybatis.service.EnhancedBaseService;
+import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 
 import java.util.List;
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.Set;
  * 菜单表 服务接口
  *
  * @author Beck
- * @since 2020-12-09 19:49:30
+ * @since 2020-12-09
  */
 public interface SysMenuService extends EnhancedBaseService<SysMenu, SysMenuDTO> {
 

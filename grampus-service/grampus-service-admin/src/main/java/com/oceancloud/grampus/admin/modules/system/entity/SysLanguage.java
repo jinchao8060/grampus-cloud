@@ -1,20 +1,19 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.persistence.Table;
 
 /**
  * 系统语言表 表实体类
  *
  * @author Beck
- * @since 2021-06-08 10:42:15
+ * @since 2021-06-08
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "sys_language")
+@TableName("sys_language")
 public class SysLanguage extends BaseEntity {
 	private static final long serialVersionUID = 435915333127102526L;
 	/**

@@ -1,21 +1,21 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
  * 操作日志表(LogOperation) 表实体类
  *
  * @author Beck
- * @since 2021-05-31 16:43:11
+ * @since 2021-05-31
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "log_operation")
+@TableName("log_operation")
 public class LogOperation extends BaseEntity {
 	private static final long serialVersionUID = -64891032904391963L;
 	/**

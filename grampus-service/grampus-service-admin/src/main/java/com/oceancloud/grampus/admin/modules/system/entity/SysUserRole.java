@@ -1,20 +1,19 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.persistence.Table;
 
 /**
  * 用户角色关联表 实体类
  *
  * @author Beck
- * @since 2020-12-09 19:51:16
+ * @since 2020-12-09
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "sys_user_role")
+@TableName("sys_user_role")
 public class SysUserRole extends BaseEntity {
 	private static final long serialVersionUID = -32651746651171969L;
 	/**

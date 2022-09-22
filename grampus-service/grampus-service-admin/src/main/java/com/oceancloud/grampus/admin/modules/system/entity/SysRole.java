@@ -1,24 +1,24 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.annotation.FieldFill;
 import com.oceancloud.grampus.framework.mybatis.annotation.TableField;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import tk.mybatis.mapper.annotation.LogicDelete;
 
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
  * 角色表 实体类
  *
  * @author Beck
- * @since 2020-12-09 19:50:15
+ * @since 2020-12-09
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "sys_role")
+@TableName("sys_role")
 public class SysRole extends BaseEntity {
 	private static final long serialVersionUID = 748889808530861432L;
 	/**
@@ -52,6 +52,6 @@ public class SysRole extends BaseEntity {
 	/**
 	 * 删除标识(0正常 1删除)
 	 */
-	@LogicDelete
+	@TableLogic
 	private Integer delFlag;
 }

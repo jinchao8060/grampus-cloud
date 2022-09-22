@@ -1,4 +1,4 @@
-CREATE TABLE sys_oauth_client_details
+CREATE TABLE oauth_client_details
 (
     client_id               VARCHAR(256) PRIMARY KEY,
     resource_ids            VARCHAR(256),
@@ -13,7 +13,7 @@ CREATE TABLE sys_oauth_client_details
     autoapprove             VARCHAR(256)
 );
 
-create table sys_oauth_code
+create table oauth_code
 (
     code           VARCHAR(256),
     authentication BLOB

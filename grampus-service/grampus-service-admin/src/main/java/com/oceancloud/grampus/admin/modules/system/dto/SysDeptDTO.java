@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 系统部门DTO
  *
  * @author Beck
- * @since 2020-12-03 20:06:54
+ * @since 2020-12-03
  */
 @Data
 @ApiModel("系统部门")

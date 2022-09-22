@@ -1,23 +1,23 @@
 package com.oceancloud.grampus.admin.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.oceancloud.grampus.framework.mybatis.annotation.FieldFill;
 import com.oceancloud.grampus.framework.mybatis.annotation.TableField;
 import com.oceancloud.grampus.framework.mybatis.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
  * 用户登陆日志表 实体类
  *
  * @author Beck
- * @since 2020-12-09 19:48:58
+ * @since 2020-12-09
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "sys_log_login")
+@TableName("sys_log_login")
 public class SysLogLogin extends BaseEntity {
 	private static final long serialVersionUID = -94189723127366413L;
 	/**

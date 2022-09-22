@@ -12,10 +12,10 @@ import java.util.List;
  * 系统角色DTO
  *
  * @author Beck
- * @since 2020-12-09 19:50:15
+ * @since 2021-08-20
  */
-@ApiModel("系统角色")
 @Data
+@ApiModel("系统角色")
 public class SysRoleDTO implements Serializable {
 	private static final long serialVersionUID = -4592002714978614167L;
 	/**

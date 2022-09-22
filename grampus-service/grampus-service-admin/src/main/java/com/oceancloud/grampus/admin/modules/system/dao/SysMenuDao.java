@@ -11,7 +11,7 @@ import java.util.List;
  * 菜单表 数据库访问层
  *
  * @author Beck
- * @since 2020-12-09 19:49:29
+ * @since 2020-12-09
  */
 @MyBatisMapper
 public interface SysMenuDao extends BaseMapper<SysMenu> {

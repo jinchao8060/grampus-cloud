@@ -10,7 +10,7 @@ import java.util.List;
  * 字典表 数据库访问层
  *
  * @author Beck
- * @since 2020-12-09 19:47:46
+ * @since 2020-12-09
  */
 @MyBatisMapper
 public interface SysDictDao extends BaseMapper<SysDict> {
