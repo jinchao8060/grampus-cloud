@@ -54,7 +54,7 @@ public class SysDictItemController {
 	}
 
 	@ApiOperation("字典详情批量查询")
-	@GetMapping("/map")
+	@GetMapping("map")
 	@PreAuthorize("hasAuthority('sys:dict:info')")
 	public Result<Map<String, List<SysDictItemDTO>>> map(@RequestParam("types") List<String> types) {
 		List<SysDictItem> itemList = sysDictItemService
