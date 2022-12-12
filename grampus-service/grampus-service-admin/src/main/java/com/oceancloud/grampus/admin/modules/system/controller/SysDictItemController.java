@@ -1,9 +1,12 @@
 package com.oceancloud.grampus.admin.modules.system.controller;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.oceancloud.grampus.admin.modules.system.dto.SysDictItemDTO;
+import com.oceancloud.grampus.admin.modules.system.entity.SysDictItem;
 import com.oceancloud.grampus.admin.modules.system.query.SysDictItemQuery;
 import com.oceancloud.grampus.admin.modules.system.service.SysDictItemService;
 import com.oceancloud.grampus.framework.core.result.Result;
+import com.oceancloud.grampus.framework.core.utils.BeanUtil;
 import com.oceancloud.grampus.framework.core.utils.StringUtil;
 import com.oceancloud.grampus.framework.log.annotation.RequestLog;
 import com.oceancloud.grampus.framework.mybatis.page.PageData;
@@ -12,16 +15,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 字典数据项接口
@@ -53,6 +51,18 @@ public class SysDictItemController {
 	public Result<SysDictItemDTO> get(@PathVariable("id") Long id) {
 		SysDictItemDTO sysDictItemDTO = sysDictItemService.queryById(id);
 		return Result.success(sysDictItemDTO);
+	}
+
+	@ApiOperation("字典详情批量查询")
+	@GetMapping("map")
+	@PreAuthorize("hasAuthority('sys:dict:info')")
+	public Result<Map<String, List<SysDictItemDTO>>> map(@RequestParam("types") List<String> types) {
+		List<SysDictItem> itemList = sysDictItemService
+				.list(Wrappers.<SysDictItem>lambdaQuery().in(SysDictItem::getDictType, types));
+		List<SysDictItemDTO> list = BeanUtil.copyList(itemList, SysDictItemDTO.class);
+		Map<String, List<SysDictItemDTO>> map = list.stream()
+				.collect(Collectors.groupingBy(SysDictItemDTO::getDictType));
+		return Result.success(map);
 	}
 
 	@RequestLog("保存字典详细")
