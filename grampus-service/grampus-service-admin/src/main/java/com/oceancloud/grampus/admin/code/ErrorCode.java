@@ -24,18 +24,12 @@ public interface ErrorCode {
 	 * 		COMMON: 10
 	 * 		APP：11
 	 * 		ADMIN：12
-	 * 		AGENT：13
-	 * 		AGENCY：14
 	 *  服务标识(2位数字)
 	 *  	认证授权服务：11
 	 *  	系统服务：12
 	 *  	会员服务：13
-	 *  	消费服务：14
-	 *  	消息中心：15
-	 *  	聊天服务：16
-	 *  	社区服务：17
-	 *  	活动服务: 18
-	 *  	发布商服务：19
+	 *  	消息中心：14
+	 *  	聊天服务：15
 	 * 	功能域(2位数字)
 	 * 		未分类：00
 	 * 		X1功能相关：01
@@ -64,7 +58,7 @@ public interface ErrorCode {
 		/**
 		 * 未知异常错误码
 		 */
-		UNKNOWN_ERROR_CODE("-1", "UNKNOWN_ERROR_CODE");
+		UNKNOWN_ERROR_CODE("-1", "未知异常错误码");
 
 		@Getter String code;
 		@Getter String msg;
@@ -79,11 +73,11 @@ public interface ErrorCode {
 		/**
 		 * 存在子菜单异常
 		 */
-		SUB_MENU_EXIST("121201B001", "SUB_MENU_EXIST"),
+		SUB_MENU_EXIST("121201B001", "存在子菜单异常"),
 		/**
 		 * 用户密码错误异常
 		 */
-		USER_PASSWORD_ERROR("121201B002", "USER_PASSWORD_ERROR");
+		USER_PASSWORD_ERROR("121201B002", "用户密码错误异常");
 
 		@Getter String code;
 		@Getter String msg;

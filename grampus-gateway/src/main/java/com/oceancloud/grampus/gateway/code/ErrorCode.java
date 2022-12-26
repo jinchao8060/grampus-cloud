@@ -24,19 +24,12 @@ public interface ErrorCode {
 	 * 		COMMON: 10
 	 * 		APP：11
 	 * 		ADMIN：12
-	 * 		AGENT：13
-	 * 		AGENCY：14
 	 *  服务标识(2位数字)
-	 *  	网关服务：10
 	 *  	认证授权服务：11
 	 *  	系统服务：12
 	 *  	会员服务：13
-	 *  	消费服务：14
-	 *  	消息中心：15
-	 *  	聊天服务：16
-	 *  	社区服务：17
-	 *  	活动服务: 18
-	 *  	发布商服务：19
+	 *  	消息中心：14
+	 *  	聊天服务：15
 	 * 	功能域(2位数字)
 	 * 		未分类：00
 	 * 		X1功能相关：01
@@ -65,7 +58,7 @@ public interface ErrorCode {
 		/**
 		 * 未知异常错误码
 		 */
-		UNKNOWN_ERROR_CODE("-1", "UNKNOWN_ERROR_CODE");
+		UNKNOWN_ERROR_CODE("-1", "未知异常错误码");
 
 		@Getter
 		String code;
@@ -81,11 +74,11 @@ public interface ErrorCode {
 		/**
 		 * 网关参数异常错误码
 		 */
-		GATEWAY_PARAMS_DECODE_ERROR("101000P001", "GATEWAY_PARAMS_DECODE_ERROR"),
+		GATEWAY_PARAMS_DECODE_ERROR("101000P001", "网关参数异常错误码"),
 		/**
 		 * 请求拒绝异常错误码
 		 */
-		GATEWAY_REQUEST_REFUSE_ERROR("101000P002", "GATEWAY_REQUEST_REFUSE_ERROR");
+		GATEWAY_REQUEST_REFUSE_ERROR("101000P002", "请求拒绝异常错误码");
 
 		@Getter
 		String code;
@@ -102,7 +95,7 @@ public interface ErrorCode {
 		/**
 		 * 存在子菜单异常
 		 */
-		SUB_MENU_EXIST("121201B001", "SUB_MENU_EXIST");
+		SUB_MENU_EXIST("121201B001", "存在子菜单异常");
 
 		@Getter String code;
 		@Getter String msg;
