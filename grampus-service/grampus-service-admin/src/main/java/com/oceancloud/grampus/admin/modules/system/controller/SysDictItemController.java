@@ -55,7 +55,6 @@ public class SysDictItemController {
 
 	@ApiOperation("字典详情批量查询")
 	@GetMapping("map")
-	@PreAuthorize("hasAuthority('sys:dict:info')")
 	public Result<Map<String, List<SysDictItemDTO>>> map(@RequestParam("types") List<String> types) {
 		List<SysDictItem> itemList = sysDictItemService
 				.list(Wrappers.<SysDictItem>lambdaQuery().in(SysDictItem::getDictType, types));
