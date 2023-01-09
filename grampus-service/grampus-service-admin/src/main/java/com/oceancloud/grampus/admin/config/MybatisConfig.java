@@ -8,6 +8,7 @@ import com.oceancloud.grampus.framework.mybatis.handler.FieldFillHandler;
 import com.oceancloud.grampus.framework.mybatis.interceptor.FieldFillInterceptor;
 import com.oceancloud.grampus.framework.mybatis.interceptor.TableFieldObject;
 import org.apache.ibatis.mapping.SqlCommandType;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
  * @since 2021-04-26
  */
 @Configuration
+@MapperScan(basePackages = "com.oceancloud.**.dao")
 public class MybatisConfig {
 
 	@Bean
