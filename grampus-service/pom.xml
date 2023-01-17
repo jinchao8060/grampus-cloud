@@ -15,6 +15,5 @@
 	<modules>
 		<module>grampus-service-auth</module>
 		<module>grampus-service-admin</module>
-		<module>grampus-service-member</module>
 	</modules>
 </project>

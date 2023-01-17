@@ -23,6 +23,6 @@
 		<if test="type != null">
 		  AND sm.type = #{type}
 		</if>
-		ORDER BY sm.`sort` ASC
+		ORDER BY sm.`sort`,sm.`id` ASC
     </select>
 </mapper>

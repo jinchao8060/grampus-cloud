@@ -3,6 +3,7 @@ package com.oceancloud.grampus.admin.modules.system.controller;
 import com.google.common.collect.Maps;
 import com.oceancloud.grampus.admin.modules.security.pojo.LoginReq;
 import com.oceancloud.grampus.auth.modules.system.client.feign.RemoteOAuthTokenClient;
+import com.oceancloud.grampus.auth.modules.system.client.feign.RemoteSystemUserDetailsClient;
 import com.oceancloud.grampus.framework.oauth2.modules.system.users.SystemUserDetails;
 import com.oceancloud.grampus.framework.oauth2.modules.system.utils.SystemSecurityUtils;
 import com.oceancloud.grampus.framework.core.result.Result;
@@ -32,6 +33,7 @@ import java.util.Map;
 public class LoginController {
 
 	private final RemoteOAuthTokenClient remoteOAuthTokenClient;
+	private final RemoteSystemUserDetailsClient remoteSystemUserDetailsClient;
 
 	@ApiOperation("登录接口")
 	@PostMapping("/login")
@@ -48,6 +50,8 @@ public class LoginController {
 		}
 
 		result.put("token", "Bearer " + result.get("access_token"));
+		// TODO 待优化
+		remoteSystemUserDetailsClient.removeSystemUserDetails(username);
 
 		return Result.success(result);
 	}

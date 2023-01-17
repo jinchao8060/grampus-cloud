@@ -45,7 +45,8 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
 		Result<Object> result;
 		if (throwable instanceof ApiException) {
-			result = Result.error(((ApiException) throwable).getCode(), null);
+			ApiException ex = (ApiException) throwable;
+			result = Result.error(ex.getCode(), ex.getMessage());
 		} else {
 			result = Result.error(ErrorCode.Global.UNKNOWN_ERROR_CODE.getCode(), ErrorCode.Global.UNKNOWN_ERROR_CODE.getMsg());
 		}
