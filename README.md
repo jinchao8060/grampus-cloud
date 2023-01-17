@@ -1,5 +1,3 @@
 # grampus-cloud
 
-## 平台简介
-
-grampus-cloud是一款基于SpringCloudAlibaba的微服务快速开发平台
+#### 基于GrampusFramework的微服务RBAC权限管理系统（仅后端）
